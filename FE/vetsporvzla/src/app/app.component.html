@@ -103,39 +103,77 @@
     <div class="modal" (click)="$event.stopPropagation()">
       <div class="modal-head">
         <h2>Reportar mascota</h2>
-        <button class="close" (click)="closeModal()">✕</button>
+        <button class="close" type="button" (click)="closeModal()">✕</button>
       </div>
-      <div class="form-row">
-        <div class="form-grp">
-          <label>Tipo de reporte</label>
-          <select>
-            <option>Mascota perdida</option>
-            <option>Mascota encontrada</option>
-            <option>En adopción</option>
-          </select>
+
+      @if (submitSuccess()) {
+        <div style="text-align:center;padding:24px 0 8px">
+          <p style="font-size:15px;color:#2F9E63;margin:0 0 20px">✅ Reporte enviado. Un veterinario revisará tu caso pronto.</p>
+          <button class="submit-btn" type="button" (click)="closeModal()">Cerrar</button>
         </div>
-        <div class="form-grp">
-          <label>Especie</label>
-          <select><option>Perro</option><option>Gato</option><option>Otro</option></select>
-        </div>
-      </div>
-      <div class="form-grp">
-        <label>Nombre (si lo conoce)</label>
-        <input type="text" placeholder="Ej: Luna, Max…">
-      </div>
-      <div class="form-grp">
-        <label>Descripción</label>
-        <textarea placeholder="Color, tamaño, señas particulares…"></textarea>
-      </div>
-      <div class="form-grp">
-        <label>Ubicación</label>
-        <input type="text" placeholder="Sector, municipio, estado…">
-      </div>
-      <div class="form-grp">
-        <label>Teléfono de contacto</label>
-        <input type="tel" placeholder="04XX-XXXXXXX">
-      </div>
-      <button class="submit-btn">Enviar reporte</button>
+      } @else {
+        <form [formGroup]="reportForm" (ngSubmit)="submit()">
+          <div class="form-row">
+            <div class="form-grp">
+              <label>Tipo de reporte</label>
+              <select formControlName="tipo">
+                <option value="P">Mascota perdida</option>
+                <option value="E">Mascota encontrada</option>
+              </select>
+            </div>
+            <div class="form-grp">
+              <label>Especie</label>
+              <select formControlName="an_tp_animal">
+                <option value="P">Perro</option>
+                <option value="G">Gato</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-grp">
+              <label>Tamaño</label>
+              <select formControlName="an_tp_size">
+                <option value="P">Pequeño</option>
+                <option value="M">Mediano</option>
+                <option value="G">Grande</option>
+              </select>
+            </div>
+            <div class="form-grp">
+              <label>Sexo</label>
+              <select formControlName="an_tp_sex">
+                <option value="M">Macho</option>
+                <option value="H">Hembra</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-grp">
+            <label>Color</label>
+            <input type="text" formControlName="an_de_color" placeholder="Ej: marrón, blanco y negro…">
+          </div>
+          <div class="form-grp">
+            <label>Nombre (si lo conoce)</label>
+            <input type="text" formControlName="an_nm_animal" placeholder="Ej: Luna, Max…">
+          </div>
+          <div class="form-grp">
+            <label>Descripción</label>
+            <textarea formControlName="an_de_animal" placeholder="Señas particulares, collar, estado de salud…"></textarea>
+          </div>
+          <div class="form-grp">
+            <label>Ubicación</label>
+            <input type="text" formControlName="ubicacion" placeholder="Sector, municipio, estado…">
+          </div>
+          <div class="form-grp">
+            <label>Teléfono de contacto</label>
+            <input type="tel" formControlName="telefono" placeholder="04XX-XXXXXXX">
+          </div>
+          @if (submitError()) {
+            <p style="color:#DC4A4A;font-size:14px;margin:0 0 10px">{{ submitError() }}</p>
+          }
+          <button class="submit-btn" type="submit" [disabled]="submitting()">
+            {{ submitting() ? 'Enviando…' : 'Enviar reporte' }}
+          </button>
+        </form>
+      }
     </div>
   </div>
 }

@@ -17,6 +17,7 @@ USE veterinarios_venezuela;
 -- ============================================================
 -- TABLE: Role
 -- ============================================================
+DROP TABLE IF EXISTS role;
 CREATE TABLE IF NOT EXISTS role (
   ro_cd_role        INT UNSIGNED    NOT NULL AUTO_INCREMENT,
   ro_nm_role        VARCHAR(20)     NOT NULL COMMENT 'ADMIN | VET | PUBLICO | SUPERADMIN',
@@ -36,6 +37,7 @@ CREATE TABLE IF NOT EXISTS role (
 -- ============================================================
 -- TABLE: User
 -- ============================================================
+DROP TABLE IF EXISTS user;
 CREATE TABLE IF NOT EXISTS user (
   us_cd_user            INT UNSIGNED    NOT NULL AUTO_INCREMENT,
   us_ro_cd_role         INT UNSIGNED    NOT NULL COMMENT 'FK → role.ro_cd_role',
@@ -66,6 +68,7 @@ CREATE TABLE IF NOT EXISTS user (
 -- ============================================================
 -- TABLE: Estado  (Venezuelan states)
 -- ============================================================
+DROP TABLE IF EXISTS estado;
 CREATE TABLE IF NOT EXISTS estado (
   es_cd_estado      INT UNSIGNED    NOT NULL AUTO_INCREMENT,
   es_cd_country     INT             NOT NULL DEFAULT 58,
@@ -86,6 +89,7 @@ CREATE TABLE IF NOT EXISTS estado (
 -- ============================================================
 -- TABLE: Ubicacion  (Location)
 -- ============================================================
+DROP TABLE IF EXISTS ubicacion;
 CREATE TABLE IF NOT EXISTS ubicacion (
   ur_cd_ubicacion     INT UNSIGNED    NOT NULL AUTO_INCREMENT,
   ur_es_cd_estado     INT UNSIGNED    NOT NULL COMMENT 'FK → estado.es_cd_estado',
@@ -112,6 +116,7 @@ CREATE TABLE IF NOT EXISTS ubicacion (
 -- ============================================================
 -- TABLE: Contacto
 -- ============================================================
+DROP TABLE IF EXISTS contacto;
 CREATE TABLE IF NOT EXISTS contacto (
   co_cd_contacto        INT UNSIGNED    NOT NULL AUTO_INCREMENT,
   co_nm_first_name      VARCHAR(100)    NOT NULL,
@@ -136,20 +141,21 @@ CREATE TABLE IF NOT EXISTS contacto (
 -- ============================================================
 -- TABLE: Animal
 -- ============================================================
+DROP TABLE IF EXISTS animal;
 CREATE TABLE IF NOT EXISTS animal (
   an_cd_animal            INT UNSIGNED    NOT NULL AUTO_INCREMENT,
   an_re_cd_refugio        INT UNSIGNED        NULL COMMENT 'FK → refugio.re_cd_refugio (optional)',
   an_nm_animal            VARCHAR(100)        NULL COMMENT 'Name of the animal (optional)',
-  an_tp_animal            CHAR(1)         NOT NULL COMMENT 'G=Gato | P=Perro',
+  an_tp_animal            CHAR(1)          NULL COMMENT 'G=Gato | P=Perro',
   an_de_breed             VARCHAR(100)        NULL,
-  an_de_color             VARCHAR(100)    NOT NULL,
-  an_tp_size              CHAR(1)         NOT NULL COMMENT 'P=Pequeño | M=Mediano | G=Grande',
-  an_tp_sex               CHAR(1)         NOT NULL COMMENT 'M=Macho | H=Hembra',
+  an_de_color             VARCHAR(100)     NULL,
+  an_tp_size              CHAR(1)          NULL COMMENT 'P=Pequeño | M=Mediano | G=Grande',
+  an_tp_sex               CHAR(1)          NULL COMMENT 'M=Macho | H=Hembra',
   an_nu_approx_age        TINYINT UNSIGNED    NULL COMMENT 'Approximate age in years',
-  an_de_animal            TEXT            NOT NULL COMMENT 'Physical description',
-  an_in_require_vet_review CHAR(1)        NOT NULL COMMENT 'S=Si | N=No',
+  an_de_animal            TEXT             NULL COMMENT 'Physical description',
+  an_in_require_vet_review CHAR(1)         NULL COMMENT 'S=Si | N=No',
   an_de_observacion_vet   TEXT                NULL COMMENT 'Observacion from vet',
-  an_st_vet_review        CHAR(1)         NOT NULL DEFAULT 'P' COMMENT 'P=Pendiente | A=Activo | R=Revisado',
+  an_st_vet_review        CHAR(1)          NULL DEFAULT 'P' COMMENT 'P=Pendiente | A=Activo | R=Revisado',
   an_dt_created           DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP,
   an_dt_updated           DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 
@@ -175,6 +181,7 @@ CREATE TABLE IF NOT EXISTS animal (
 --       declared above but Refugio table is defined here.
 --       We use FOREIGN KEY CHECKS = 0 at the top to allow this.
 -- ============================================================
+DROP TABLE IF EXISTS refugio;
 CREATE TABLE IF NOT EXISTS refugio (
   re_cd_refugio               INT UNSIGNED    NOT NULL AUTO_INCREMENT,
   re_cd_contacto              INT UNSIGNED    NOT NULL COMMENT 'FK → contacto.co_cd_contacto',
@@ -215,6 +222,7 @@ CREATE TABLE IF NOT EXISTS refugio (
 -- ============================================================
 -- TABLE: Solicitud  (Lost / Found report)
 -- ============================================================
+DROP TABLE IF EXISTS solicitud;
 CREATE TABLE IF NOT EXISTS solicitud (
   so_cd_solicitud           INT UNSIGNED    NOT NULL AUTO_INCREMENT,
   so_an_cd_animal           INT UNSIGNED    NOT NULL COMMENT 'FK → animal.an_cd_animal',
@@ -250,6 +258,7 @@ CREATE TABLE IF NOT EXISTS solicitud (
 -- ============================================================
 -- TABLE: RevisionVeterinaria  (Vet Review)
 -- ============================================================
+DROP TABLE IF EXISTS revision_veterinaria;
 CREATE TABLE IF NOT EXISTS revision_veterinaria (
   rv_cd_revision_vet    INT UNSIGNED    NOT NULL AUTO_INCREMENT,
   rv_an_cd_animal       INT UNSIGNED    NOT NULL COMMENT 'FK → animal.an_cd_animal',
@@ -325,30 +334,30 @@ INSERT INTO role (ro_nm_role, ro_st_role) VALUES
 
 -- Venezuelan states (24 estados + Distrito Capital)
 INSERT INTO estado (es_nm_estado, es_cd_country, es_st_estado) VALUES
-  ('Amazonas',          58 'A'),
-  ('Anzoátegui',        58 'A'),
-  ('Apure',             58 'A'),
-  ('Aragua',            58 'A'),
-  ('Barinas',           58 'A'),
-  ('Bolívar',           58 'A'),
-  ('Carabobo',          58 'A'),
-  ('Cojedes',           58 'A'),
-  ('Delta Amacuro',     58 'A'),
-  ('Distrito Capital',  58 'A'),
-  ('Falcón',            58 'A'),
-  ('Guárico',           58 'A'),
-  ('Lara',              58 'A'),
-  ('Mérida',            58 'A'),
-  ('Miranda',           58 'A'),
-  ('Monagas',           58 'A'),
-  ('Nueva Esparta',     58 'A'),
-  ('Portuguesa',        58 'A'),
-  ('Sucre',             58 'A'),
-  ('Táchira',           58 'A'),
-  ('Trujillo',          58 'A'),
-  ('La Guaira',         58 'A'),
-  ('Yaracuy',           58 'A'),
-  ('Zulia',             58 'A');
+  ('Amazonas',          58,'A'),
+  ('Anzoátegui',        58 ,'A'),
+  ('Apure',             58 ,'A'),
+  ('Aragua',            58 ,'A'),
+  ('Barinas',           58 ,'A'),
+  ('Bolívar',           58 ,'A'),
+  ('Carabobo',          58 ,'A'),
+  ('Cojedes',           58 ,'A'),
+  ('Delta Amacuro',     58 ,'A'),
+  ('Distrito Capital',  58 ,'A'),
+  ('Falcón',            58 ,'A'),
+  ('Guárico',           58 ,'A'),
+  ('Lara',              58 ,'A'),
+  ('Mérida',            58 ,'A'),
+  ('Miranda',           58 ,'A'),
+  ('Monagas',           58 ,'A'),
+  ('Nueva Esparta',     58 ,'A'),
+  ('Portuguesa',        58 ,'A'),
+  ('Sucre',             58 ,'A'),
+  ('Táchira',           58 ,'A'),
+  ('Trujillo',          58 ,'A'),
+  ('La Guaira',         58 ,'A'),
+  ('Yaracuy',           58 ,'A'),
+  ('Zulia',             58 ,'A');
 
 
 -- ============================================================

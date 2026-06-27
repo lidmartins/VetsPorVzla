@@ -148,6 +148,7 @@ CREATE TABLE IF NOT EXISTS animal (
   an_nu_approx_age        TINYINT UNSIGNED    NULL COMMENT 'Approximate age in years',
   an_de_animal            TEXT            NOT NULL COMMENT 'Physical description',
   an_in_require_vet_review CHAR(1)        NOT NULL COMMENT 'S=Si | N=No',
+  an_de_observacion_vet   TEXT                NULL COMMENT 'Observacion from vet',
   an_st_vet_review        CHAR(1)         NOT NULL DEFAULT 'P' COMMENT 'P=Pendiente | A=Activo | R=Revisado',
   an_dt_created           DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP,
   an_dt_updated           DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,

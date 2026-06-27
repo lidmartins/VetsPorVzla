@@ -721,4 +721,39 @@ BEGIN
         (p_rv_st_vet_review IS NULL OR rv_st_vet_review = p_rv_st_vet_review);
 END$$
 
+-- ============================================================
+--            STORED PROCEDURES FOR: auth
+-- ============================================================
+
+DROP PROCEDURE IF EXISTS sp_user_login_validate$$
+CREATE PROCEDURE sp_user_login_validate(
+    IN p_username VARCHAR(100)
+)
+    COMMENT 'Looks up an active user by email for login. Password verification is done in the application layer (BCrypt).'
+BEGIN
+    DECLARE v_user_count INT DEFAULT 0;
+
+    SELECT COUNT(*) INTO v_user_count
+    FROM user u
+    WHERE u.us_de_email = p_username
+      AND u.us_st_user = 'A';
+
+    IF v_user_count = 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'user/password not found';
+    END IF;
+
+    SELECT
+        u.us_cd_user                                        AS user_id,
+        u.us_de_email                                       AS username,
+        CONCAT(u.us_nm_first_name, ' ', u.us_nm_last_name) AS full_name,
+        u.us_de_email                                       AS email,
+        u.us_de_password_hash                               AS password_hash,
+        r.ro_cd_role                                        AS role_id,
+        r.ro_nm_role                                        AS role_name
+    FROM user u
+    INNER JOIN role r ON u.us_ro_cd_role = r.ro_cd_role
+    WHERE u.us_de_email = p_username
+      AND u.us_st_user = 'A';
+END$$
+
 DELIMITER ;

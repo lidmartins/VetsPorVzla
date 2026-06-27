@@ -1,1 +1,69 @@
-<p>dashboard works!</p>
+<div class="vmain-head">
+  <div>
+    <h1>Dashboard</h1>
+    <p>Bienvenido · Resumen de actividad de emergencia</p>
+  </div>
+</div>
+
+<div class="statgrid">
+  @for (s of stats; track s.l) {
+    <div class="stat">
+      <div class="r">
+        <div class="ic" [style.background]="s.bg">{{ s.ic }}</div>
+        <span class="delta" [style.color]="s.deltaColor">{{ s.delta }}</span>
+      </div>
+      <div class="n">{{ s.n }}</div>
+      <div class="l">{{ s.l }}</div>
+    </div>
+  }
+</div>
+
+<div class="panel">
+  <div class="panel-head">
+    <h3>Solicitudes recientes</h3>
+    <span class="pill-pending">{{ recentRequests.length }} pendientes</span>
+  </div>
+  <div class="table-scroll">
+    <div class="table">
+      <div class="trow thead">
+        <span>Solicitante</span>
+        <span>Animal</span>
+        <span>Fecha</span>
+        <span>Estado</span>
+        <span style="text-align:right">Acciones</span>
+      </div>
+      @for (r of recentRequests; track r.email) {
+        <div class="trow">
+          <div class="who">
+            <div class="av" [style.background]="r.bg">{{ r.initials }}</div>
+            <div><b>{{ r.name }}</b><small>{{ r.email }}</small></div>
+          </div>
+          <span class="animal">{{ r.animal }}</span>
+          <span class="date">{{ r.date }}</span>
+          <span class="stpill" [style.background]="r.statusBg" [style.color]="r.statusColor">{{ r.status }}</span>
+          <div class="acts">
+            <button class="bt-approve">✓ Aprobar</button>
+            <button class="bt-reject">✕ Rechazar</button>
+            <button class="bt-info">···</button>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</div>
+
+<div class="animals">
+  <div class="h"><h3>Animales recientes</h3></div>
+  <div class="aglist">
+    @for (a of recentAnimals; track a.name) {
+      <div class="aitem">
+        <div class="av" [style.background]="a.bg">{{ a.ic }}</div>
+        <div>
+          <b>{{ a.name }}</b>
+          <small>{{ a.breed }}</small>
+          <span class="st" [style.background]="a.stBg" [style.color]="a.stColor">{{ a.st }}</span>
+        </div>
+      </div>
+    }
+  </div>
+</div>

@@ -1,1 +1,50 @@
-<p>found works!</p>
+<div class="wrap page-pad">
+  <h1 class="page-h1">🟢 Mascotas Encontradas</h1>
+  <p class="lead">Animales encontrados durante la emergencia que esperan ser reclamados por sus dueños.</p>
+
+  <div class="filterbar">
+    <div class="chips">
+      <button class="chip" [class.active]="filter()==='all'"   [class.teal]="filter()==='all'"   (click)="setFilter('all')">Todos</button>
+      <button class="chip" [class.active]="filter()==='dog'"   [class.teal]="filter()==='dog'"   (click)="setFilter('dog')">🐕 Perros</button>
+      <button class="chip" [class.active]="filter()==='cat'"   [class.teal]="filter()==='cat'"   (click)="setFilter('cat')">🐈 Gatos</button>
+      <button class="chip" [class.active]="filter()==='other'" [class.teal]="filter()==='other'" (click)="setFilter('other')">Otros</button>
+    </div>
+    <div class="divider"></div>
+    <div class="search">
+      <i>🔍</i>
+      <input type="text" placeholder="Buscar por zona…" (input)="onSearch($event)">
+    </div>
+    <span class="count">{{ filtered().length }} reportes</span>
+  </div>
+
+  <div class="grid">
+    @for (a of filtered(); track a.zone + a.time) {
+      <div class="pet">
+        <div class="photo" [style.background]="a.color">
+          <span class="pw">{{ a.icon }}</span>
+          <span class="badge found">● ENCONTRADA</span>
+          <span class="statuschip">{{ a.status }}</span>
+        </div>
+        <div class="body">
+          <div class="title">
+            <span class="pname">{{ a.name }}</span>
+            <span class="sp">{{ a.breed }}</span>
+          </div>
+          <div class="meta">📍 {{ a.zone }}, {{ a.state }}</div>
+          <div class="meta t">🕐 {{ a.time }}</div>
+          <div class="actions">
+            <button class="act call">📞 Llamar</button>
+            <button class="act wa">💬 WhatsApp</button>
+          </div>
+          <button class="share">↗ Compartir</button>
+        </div>
+      </div>
+    }
+    @empty {
+      <div class="empty">
+        <div class="ico">🔍</div>
+        <p>No hay reportes que coincidan con tu búsqueda.</p>
+      </div>
+    }
+  </div>
+</div>

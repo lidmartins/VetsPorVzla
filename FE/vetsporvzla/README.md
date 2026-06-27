@@ -1,59 +1,78 @@
-# Vetsporvzla
+# Veterinarios por Venezuela — Frontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.27.
+Angular 19 frontend for the emergency animal coordination platform.
 
-## Development server
+---
 
-To start a local development server, run:
+## Requirements
+
+### With Docker (recommended)
+
+- **Docker Desktop** ≥ 20.10 — [https://www.docker.com/products/docker-desktop](https://www.docker.com/products/docker-desktop)
+  - Windows / Mac: Docker Desktop includes both Docker Engine and Compose
+  - Linux: install [Docker Engine](https://docs.docker.com/engine/install/) + the [Compose plugin](https://docs.docker.com/compose/install/) separately
+
+Verify your installation:
 
 ```bash
+docker --version          # Docker version 20.10+
+docker compose version    # Docker Compose version v2+
+```
+
+### Without Docker
+
+| Tool        | Version  | Download |
+|-------------|----------|----------|
+| Node.js     | 20 LTS   | https://nodejs.org |
+| npm         | 9+       | bundled with Node |
+| Angular CLI | 19       | `npm install -g @angular/cli` |
+
+---
+
+## Running the app
+
+### With Docker
+
+```bash
+# From this directory (FE/vetsporvzla)
+docker compose up
+```
+
+The app will be available at **http://localhost:4200**.
+
+> The first run takes a few minutes — Docker pulls the `node:20` image and runs `npm install` inside the container. Subsequent starts are faster because `node_modules` persists via the volume mount.
+
+Run in the background:
+
+```bash
+docker compose up -d
+
+# Stop the container
+docker compose down
+```
+
+### Without Docker
+
+```bash
+# Install dependencies
+npm install
+
+# Start the dev server
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+The app will be available at **http://localhost:4200**.
 
-## Code scaffolding
+---
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Environment
 
-```bash
-ng generate component component-name
+The app connects to the backend API at `http://localhost:8080` by default.
+To change it, edit `src/environments/environment.ts`:
+
+```typescript
+export const environment = {
+  production: false,
+  apiUrl: 'http://localhost:8080'
+};
 ```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.

@@ -1,11 +1,11 @@
 // pagination.component.ts
 import { Component, Input, Output, EventEmitter, computed, input } from '@angular/core';
-import { NgFor, NgIf } from '@angular/common';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-pagination',
   standalone: true,
-  imports: [NgFor, NgIf],
+  imports: [NgIf],
   template: `
     <div class="pgn" *ngIf="pages() > 1">
       <button class="pgn-btn" [disabled]="page <= 1" (click)="go(page - 1)">‹</button>

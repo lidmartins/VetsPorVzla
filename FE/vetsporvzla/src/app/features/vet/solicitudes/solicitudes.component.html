@@ -1,13 +1,15 @@
-<!-- solicitudes.component.html -->
 <div class="vmain-head">
-  <div><h1>Solicitudes</h1><p>Revisión de reportes enviados por el público</p></div>
-  <div class="filters">
-    <select (change)="filterTp.set($any($event.target).value); page.set(1)">
+  <div>
+    <h1>Solicitudes</h1>
+    <p>Revisión de reportes enviados por el público</p>
+  </div>
+  <div style="display:flex;gap:10px;flex-wrap:wrap">
+    <select class="vf-select" (change)="filterTp.set($any($event.target).value); page.set(1)">
       <option value="">Todos los tipos</option>
       <option value="P">🔴 Perdidos</option>
       <option value="E">🟢 Encontrados</option>
     </select>
-    <select (change)="filterSt.set($any($event.target).value); page.set(1)">
+    <select class="vf-select" (change)="filterSt.set($any($event.target).value); page.set(1)">
       <option value="">Todos los estados</option>
       <option value="P">⏳ Pendientes</option>
       <option value="A">✅ Activas</option>
@@ -23,15 +25,41 @@
       <span class="pill-pending">{{ data.totalElements }} registros</span>
     </div>
     <div class="table-scroll">
-      <table class="vtable">
-        <thead><tr class="vthead">...</tr></thead>
-        <tbody>
-          @for (sol of data.content; track sol.so_cd_solicitud) {
-            <tr class="vtrow" (click)="openDetail(sol.so_cd_solicitud)">...</tr>
-          }
-        </tbody>
-      </table>
+      <div class="vtable" style="min-width:760px">
+        <div class="vtrow vthead" style="grid-template-columns:1fr 1.6fr 1.6fr 1fr 1fr 1.4fr">
+          <span>#</span>
+          <span>Tipo</span>
+          <span>Contacto</span>
+          <span>Fecha</span>
+          <span>Estado</span>
+          <span style="text-align:right">Acciones</span>
+        </div>
+        @for (sol of data.content; track sol.so_cd_solicitud) {
+          <div class="vtrow" style="grid-template-columns:1fr 1.6fr 1.6fr 1fr 1fr 1.4fr">
+            <span style="color:#9aa49f;font-size:13px">#{{ sol.so_cd_solicitud }}</span>
+            <span class="stpill"
+              [style.background]="typeBg(sol.so_tp_solicitud)"
+              [style.color]="typeColor(sol.so_tp_solicitud)">
+              {{ typeLabel(sol.so_tp_solicitud) }}
+            </span>
+            <div>
+              <div style="font-weight:600;color:#33403c">{{ sol.contacto ? sol.contacto.co_nm_first_name + ' ' + sol.contacto.co_nm_last_name : '—' }}</div>
+              <div style="font-size:12px;color:#9aa49f">{{ sol.contacto?.co_de_phone ?? '' }}</div>
+            </div>
+            <span style="font-size:13px;color:#8a938d">{{ sol.so_dt_evento | slice:0:10 }}</span>
+            <span class="stpill"
+              [style.background]="statusBg(sol.so_st_solicitud)"
+              [style.color]="statusColor(sol.so_st_solicitud)">
+              {{ statusLabel(sol.so_st_solicitud) }}
+            </span>
+            <div class="trow" style="padding:0;border:none;justify-content:flex-end">
+              <button class="bt-info" (click)="openDetail(sol.so_cd_solicitud)">Ver →</button>
+            </div>
+          </div>
+        }
+      </div>
     </div>
+
     <app-pagination
       [page]="page()"
       [total]="data.totalElements"

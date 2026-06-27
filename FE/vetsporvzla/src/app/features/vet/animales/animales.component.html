@@ -1,1 +1,50 @@
-<p>animales works!</p>
+<div class="vmain-head">
+  <div>
+    <h1>Animales</h1>
+    <p>Registro de todos los animales en el sistema</p>
+  </div>
+</div>
+
+<div class="filterbar">
+  <div class="search">
+    <i>🔍</i>
+    <input type="text" placeholder="Buscar por nombre, raza, refugio…" (input)="onSearch($event)">
+  </div>
+  <select class="vf-select" (change)="statusFilter.set($any($event.target).value)">
+    <option value="all">Todos los estados</option>
+    <option value="perdida">Perdida</option>
+    <option value="perdido">Perdido</option>
+    <option value="encontrado">Encontrado</option>
+    <option value="en refugio">En refugio</option>
+    <option value="adoptado">Adoptado</option>
+  </select>
+  <span class="count">{{ filtered().length }} animales</span>
+</div>
+
+<div class="panel" style="margin-top:16px">
+  <div class="table-scroll">
+    <div class="vtable">
+      <div class="vtrow vthead" style="grid-template-columns:2fr 1.4fr 1.6fr 1fr 1fr">
+        <span>Animal</span>
+        <span>Raza</span>
+        <span>Refugio</span>
+        <span>Estado</span>
+        <span>Fecha</span>
+      </div>
+      @for (a of filtered(); track a.name) {
+        <div class="vtrow" style="grid-template-columns:2fr 1.4fr 1.6fr 1fr 1fr">
+          <div style="display:flex;align-items:center;gap:10px">
+            <div class="aitem" style="border:none;padding:0;background:transparent">
+              <div class="av" [style.background]="a.bg" style="width:36px;height:36px;font-size:18px">{{ a.ic }}</div>
+            </div>
+            <b style="font-weight:600;color:#33403c">{{ a.name }}</b>
+          </div>
+          <span style="color:#6b756f">{{ a.breed }}</span>
+          <span style="color:#6b756f">{{ a.shelter }}</span>
+          <span class="stpill" [style.background]="a.stBg" [style.color]="a.stColor">{{ a.status }}</span>
+          <span style="color:#8a938d;font-size:13px">{{ a.date }}</span>
+        </div>
+      }
+    </div>
+  </div>
+</div>

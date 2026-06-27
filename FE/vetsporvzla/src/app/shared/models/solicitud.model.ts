@@ -1,4 +1,7 @@
-// solicitud.model.ts
+import { Animal } from './animal.model';
+import { Contacto } from './contacto.model';
+import { Ubicacion } from './ubicacion.model';
+
 export interface Solicitud {
   so_cd_solicitud:        number;
   so_an_cd_animal:        number;

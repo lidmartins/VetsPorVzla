@@ -1,1 +1,39 @@
-<p>refugios works!</p>
+<div class="vmain-head">
+  <div>
+    <h1>Refugios</h1>
+    <p>Gestión de la red de refugios temporales</p>
+  </div>
+</div>
+
+<div class="filterbar">
+  <div class="search">
+    <i>🔍</i>
+    <input type="text" placeholder="Buscar refugio…" (input)="onSearch($event)">
+  </div>
+  <span class="count">{{ filtered().length }} refugios</span>
+</div>
+
+<div class="panel" style="margin-top:16px">
+  <div class="table-scroll">
+    <div class="vtable">
+      <div class="vtrow vthead" style="grid-template-columns:2fr 1fr 1fr 1fr 1fr 1fr">
+        <span>Refugio</span>
+        <span>Estado</span>
+        <span>Contacto</span>
+        <span>Perros</span>
+        <span>Gatos</span>
+        <span>Estado</span>
+      </div>
+      @for (r of filtered(); track r.name) {
+        <div class="vtrow" style="grid-template-columns:2fr 1fr 1fr 1fr 1fr 1fr">
+          <b style="color:#33403c">{{ r.name }}</b>
+          <span style="color:#6b756f">{{ r.state }}</span>
+          <span style="color:#0F766E;font-weight:600">{{ r.contact }}</span>
+          <span>{{ r.dogs }}/{{ r.maxDogs }}</span>
+          <span>{{ r.cats }}/{{ r.maxCats }}</span>
+          <span class="stpill" [style.background]="r.stBg" [style.color]="r.stColor">{{ r.status }}</span>
+        </div>
+      }
+    </div>
+  </div>
+</div>

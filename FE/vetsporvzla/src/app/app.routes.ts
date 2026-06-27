@@ -34,7 +34,7 @@ export const routes: Routes = [
       { path: 'animales',
         loadComponent: () => import('./features/vet/animales/animales.component').then(m => m.AnimalesComponent) },
       { path: 'refugios',
-        loadComponent: () => import('./features/vet/refugios/refugios-vet.component').then(m => m.RefugiosVetComponent) },
+        loadComponent: () => import('./features/vet/refugios/refugios.component').then(m => m.RefugiosComponent) },
     ]
   },
 

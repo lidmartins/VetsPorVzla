@@ -1,1 +1,51 @@
-<p>shelters works!</p>
+<div class="wrap page-pad">
+  <h1 class="page-h1">🏠 Refugios Temporales</h1>
+  <p class="lead">Red de refugios coordinados por veterinarios con capacidad actualizada en tiempo real.</p>
+
+  <div class="map">
+    <div class="gridlines"></div>
+    <span class="pin" style="top:30%;left:50%">📍</span>
+    <span class="pin" style="top:55%;left:35%">📍</span>
+    <span class="pin" style="top:45%;left:65%">📍</span>
+    <div class="lbl">
+      <div style="font-weight:700;font-size:14px;color:#163b37">{{ shelters.length }} refugios activos</div>
+      <div style="font-size:13px;color:#6b756f;margin-top:3px">Mapa referencial · Miranda, La Guaira, D.C.</div>
+    </div>
+  </div>
+
+  <div class="shelters">
+    @for (s of shelters; track s.name) {
+      <div class="shelter">
+        <div class="top">
+          <div>
+            <h3>{{ s.name }}</h3>
+            <div class="addr">📍 {{ s.addr }}</div>
+          </div>
+          <span class="spill" [class.open]="s.status==='open'" [class.full]="s.status==='full'">
+            {{ s.statusLabel }}
+          </span>
+        </div>
+        <div class="bars">
+          <div class="bar">
+            <div class="brow"><b>🐕 Perros</b><span>{{ s.dogs }}/{{ s.maxDogs }}</span></div>
+            <div class="track">
+              <div class="fill" [style.width.%]="(s.dogs/s.maxDogs)*100" style="background:#0F766E"></div>
+            </div>
+          </div>
+          <div class="bar">
+            <div class="brow"><b>🐈 Gatos</b><span>{{ s.cats }}/{{ s.maxCats }}</span></div>
+            <div class="track">
+              <div class="fill" [style.width.%]="(s.cats/s.maxCats)*100" style="background:#7E5BD0"></div>
+            </div>
+          </div>
+        </div>
+        <div class="svchips">
+          @for (sv of s.services; track sv) {
+            <span class="sv">✓ {{ sv }}</span>
+          }
+        </div>
+        <button class="detail">Ver detalles y contacto →</button>
+      </div>
+    }
+  </div>
+</div>

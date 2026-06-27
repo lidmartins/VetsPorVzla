@@ -1,6 +1,7 @@
 package com.vetsportvzla.backend.repository;
 
 import com.vetsportvzla.backend.dto.UserDto;
+import com.vetsportvzla.backend.dto.UserLoginLookup;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcCall;
@@ -85,5 +86,18 @@ public class UserRepository {
 
         Map<String, Object> out = jdbcCall.execute(inParams);
         return (List<UserDto>) out.get("users");
+    }
+
+    public UserLoginLookup loginUser(String username) {
+        SimpleJdbcCall jdbcCall = new SimpleJdbcCall(jdbcTemplate)
+                .withProcedureName("sp_user_login_validate")
+                .returningResultSet("login", BeanPropertyRowMapper.newInstance(UserLoginLookup.class));
+
+        Map<String, Object> inParams = new HashMap<>();
+        inParams.put("p_username", username);
+
+        Map<String, Object> out = jdbcCall.execute(inParams);
+        List<UserLoginLookup> results = (List<UserLoginLookup>) out.get("login");
+        return results.get(0);
     }
 }

@@ -1,0 +1,1171 @@
+{
+	"info": {
+		"_postman_id": "e8a3b1e3-9b1b-4b0a-8d0a-6b3b1e39b1b4",
+		"name": "Veterinarios Venezuela API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "role",
+			"item": [
+				{
+					"name": "Create Role",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"ro_nm_role\": \"TESTER\",\n    \"ro_st_role\": \"A\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/role",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"role"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Role",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"ro_nm_role\": \"TESTER_UPDATED\",\n    \"ro_st_role\": \"I\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/role/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"role",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Role",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/role/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"role",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Role by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/role/search?id=1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"role",
+								"search"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Roles",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/role/search?name=ADMIN&status=A",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"role",
+								"search"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "ADMIN"
+								},
+								{
+									"key": "status",
+									"value": "A"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"us_ro_cd_role\": 1,\n    \"us_nm_first_name\": \"John\",\n    \"us_nm_last_name\": \"Doe\",\n    \"us_de_email\": \"john.doe@example.com\",\n    \"us_de_phone\": \"1234567890\",\n    \"us_de_password_hash\": \"hashed_password\",\n    \"us_in_veterinarian\": \"S\",\n    \"us_st_user\": \"A\",\n    \"us_dt_last_login\": \"2024-01-01T12:00:00Z\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/user",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"us_ro_cd_role\": 1,\n    \"us_nm_first_name\": \"John\",\n    \"us_nm_last_name\": \"Doe\",\n    \"us_de_email\": \"john.doe.updated@example.com\",\n    \"us_de_phone\": \"1234567890\",\n    \"us_de_password_hash\": \"hashed_password_updated\",\n    \"us_in_veterinarian\": \"N\",\n    \"us_st_user\": \"I\",\n    \"us_dt_last_login\": \"2024-01-02T12:00:00Z\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/user/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/user/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/user/search?id=1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"search"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/user/search?firstName=John&email=john.doe@example.com",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"search"
+							],
+							"query": [
+								{
+									"key": "firstName",
+									"value": "John"
+								},
+								{
+									"key": "email",
+									"value": "john.doe@example.com"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "estado",
+			"item": [
+				{
+					"name": "Create Estado",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"es_cd_country\": 58,\n    \"es_nm_estado\": \"Nuevo Estado\",\n    \"es_st_estado\": \"A\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/estado",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"estado"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Estado",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"es_cd_country\": 58,\n    \"es_nm_estado\": \"Estado Actualizado\",\n    \"es_st_estado\": \"I\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/estado/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"estado",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Estado",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/estado/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"estado",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Estado by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/estado/search?id=1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"estado",
+								"search"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Estados",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/estado/search?nombre=Zulia&status=A",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"estado",
+								"search"
+							],
+							"query": [
+								{
+									"key": "nombre",
+									"value": "Zulia"
+								},
+								{
+									"key": "status",
+									"value": "A"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ubicacion",
+			"item": [
+				{
+					"name": "Create Ubicacion",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"ur_es_cd_estado\": 1,\n    \"ur_nm_city\": \"Maracaibo\",\n    \"ur_nm_sector\": \"Sector 5\",\n    \"ur_de_address\": \"Calle Falsa 123\",\n    \"ur_de_reference\": \"Cerca de la plaza\",\n    \"ur_de_postal_code\": \"4001\",\n    \"ur_nu_latitude\": 10.64,\n    \"ur_nu_longitude\": -71.64\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/ubicacion",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"ubicacion"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Ubicacion",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"ur_es_cd_estado\": 1,\n    \"ur_nm_city\": \"Caracas\",\n    \"ur_nm_sector\": \"Chacao\",\n    \"ur_de_address\": \"Avenida Principal 456\",\n    \"ur_de_reference\": \"Frente al centro comercial\",\n    \"ur_de_postal_code\": \"1060\",\n    \"ur_nu_latitude\": 10.48,\n    \"ur_nu_longitude\": -66.90\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/ubicacion/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"ubicacion",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Ubicacion",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/ubicacion/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"ubicacion",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Ubicacion by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/ubicacion/search?id=1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"ubicacion",
+								"search"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Ubicaciones",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/ubicacion/search?estadoId=1&city=Maracaibo",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"ubicacion",
+								"search"
+							],
+							"query": [
+								{
+									"key": "estadoId",
+									"value": "1"
+								},
+								{
+									"key": "city",
+									"value": "Maracaibo"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "contacto",
+			"item": [
+				{
+					"name": "Create Contacto",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"co_nm_first_name\": \"Jane\",\n    \"co_nm_last_name\": \"Doe\",\n    \"co_de_email\": \"jane.doe@example.com\",\n    \"co_de_phone\": \"0987654321\",\n    \"co_de_whatsapp\": \"0987654321\",\n    \"co_tp_contact_method\": \"W\",\n    \"co_in_allow_public\": \"S\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/contacto",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"contacto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Contacto",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"co_nm_first_name\": \"Jane\",\n    \"co_nm_last_name\": \"Doe Updated\",\n    \"co_de_email\": \"jane.doe.updated@example.com\",\n    \"co_de_phone\": \"111222333\",\n    \"co_de_whatsapp\": \"111222333\",\n    \"co_tp_contact_method\": \"E\",\n    \"co_in_allow_public\": \"N\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/contacto/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"contacto",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Contacto",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/contacto/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"contacto",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Contacto by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/contacto/search?id=1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"contacto",
+								"search"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Contactos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/contacto/search?firstName=Jane&email=jane.doe@example.com",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"contacto",
+								"search"
+							],
+							"query": [
+								{
+									"key": "firstName",
+									"value": "Jane"
+								},
+								{
+									"key": "email",
+									"value": "jane.doe@example.com"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "animal",
+			"item": [
+				{
+					"name": "Create Animal",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"an_re_cd_refugio\": 1,\n    \"an_nm_animal\": \"Fido\",\n    \"an_tp_animal\": \"P\",\n    \"an_de_breed\": \"Mestizo\",\n    \"an_de_color\": \"Negro\",\n    \"an_tp_size\": \"M\",\n    \"an_tp_sex\": \"M\",\n    \"an_nu_approx_age\": 3,\n    \"an_de_animal\": \"Amigable y jugueton\",\n    \"an_in_require_vet_review\": \"S\",\n    \"an_de_observacion_vet\": null,\n    \"an_st_vet_review\": \"P\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/animal",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"animal"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Animal",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"an_re_cd_refugio\": 1,\n    \"an_nm_animal\": \"Fido Actualizado\",\n    \"an_tp_animal\": \"P\",\n    \"an_de_breed\": \"Mestizo\",\n    \"an_de_color\": \"Marron\",\n    \"an_tp_size\": \"M\",\n    \"an_tp_sex\": \"M\",\n    \"an_nu_approx_age\": 4,\n    \"an_de_animal\": \"Amigable y jugueton, ahora mas viejo\",\n    \"an_in_require_vet_review\": \"N\",\n    \"an_de_observacion_vet\": \"Ya fue revisado\",\n    \"an_st_vet_review\": \"R\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/animal/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"animal",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Animal",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/animal/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"animal",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Animal by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/animal/search?id=1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"animal",
+								"search"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Animals",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/animal/search?type=P&size=M&sex=M",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"animal",
+								"search"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "P"
+								},
+								{
+									"key": "size",
+									"value": "M"
+								},
+								{
+									"key": "sex",
+									"value": "M"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "refugio",
+			"item": [
+				{
+					"name": "Create Refugio",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"re_cd_contacto\": 1,\n    \"re_ur_cd_ubicacion\": 1,\n    \"re_nm_refugio\": \"Hogar de Patitas\",\n    \"re_st_refugio\": \"A\",\n    \"re_nu_capacity_total\": 20,\n    \"re_nu_capacity_available\": 10,\n    \"re_tp_species_allowed\": \"A\",\n    \"re_tp_animal_special_needs\": \"CA\",\n    \"re_in_has_pets\": \"S\",\n    \"re_tp_housing\": \"CP\",\n    \"re_in_fence_housing\": \"C\",\n    \"re_de_additional_note\": \"Aceptamos donaciones\",\n    \"re_de_observacion_vet\": null\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/refugio",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"refugio"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Refugio",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"re_cd_contacto\": 1,\n    \"re_ur_cd_ubicacion\": 1,\n    \"re_nm_refugio\": \"Hogar de Patitas Felices\",\n    \"re_st_refugio\": \"X\",\n    \"re_nu_capacity_total\": 25,\n    \"re_nu_capacity_available\": 0,\n    \"re_tp_species_allowed\": \"A\",\n    \"re_tp_animal_special_needs\": \"AH\",\n    \"re_in_has_pets\": \"S\",\n    \"re_tp_housing\": \"CP\",\n    \"re_in_fence_housing\": \"C\",\n    \"re_de_additional_note\": \"Estamos llenos, pero aceptamos donaciones\",\n    \"re_de_observacion_vet\": null\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/refugio/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"refugio",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Refugio",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/refugio/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"refugio",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Refugio by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/refugio/search?id=1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"refugio",
+								"search"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Refugios",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/refugio/search?status=A&speciesAllowed=A",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"refugio",
+								"search"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "A"
+								},
+								{
+									"key": "speciesAllowed",
+									"value": "A"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "solicitud",
+			"item": [
+				{
+					"name": "Create Solicitud",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"so_an_cd_animal\": 1,\n    \"so_co_cd_contacto\": 1,\n    \"so_ur_cd_ubicacion\": 1,\n    \"so_tp_solicitud\": \"P\",\n    \"so_dt_evento\": \"2024-03-15T10:00:00Z\",\n    \"so_st_solicitud\": \"A\",\n    \"so_de_observacion_vet\": null,\n    \"so_de_s3_folder_path\": \"/path/to/s3\",\n    \"so_de_main_photo_url\": \"http://example.com/photo.jpg\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/solicitud",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"solicitud"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Solicitud",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"so_an_cd_animal\": 1,\n    \"so_co_cd_contacto\": 1,\n    \"so_ur_cd_ubicacion\": 1,\n    \"so_tp_solicitud\": \"E\",\n    \"so_dt_evento\": \"2024-03-16T11:00:00Z\",\n    \"so_st_solicitud\": \"R\",\n    \"so_de_observacion_vet\": \"Informacion incorrecta\",\n    \"so_de_s3_folder_path\": \"/path/to/s3/updated\",\n    \"so_de_main_photo_url\": \"http://example.com/photo_updated.jpg\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/solicitud/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"solicitud",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Solicitud",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/solicitud/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"solicitud",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Solicitud by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/solicitud/search?id=1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"solicitud",
+								"search"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Solicitudes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/solicitud/search?type=P&status=A",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"solicitud",
+								"search"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "P"
+								},
+								{
+									"key": "status",
+									"value": "A"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "revision-veterinaria",
+			"item": [
+				{
+					"name": "Create Revision Veterinaria",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"rv_an_cd_animal\": 1,\n    \"rv_us_cd_user\": 1,\n    \"rv_st_vet_review\": \"R\",\n    \"rv_de_comment\": \"El animal esta sano.\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/revision-veterinaria",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"revision-veterinaria"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Revision Veterinaria",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"rv_an_cd_animal\": 1,\n    \"rv_us_cd_user\": 1,\n    \"rv_st_vet_review\": \"A\",\n    \"rv_de_comment\": \"Necesita seguimiento.\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/revision-veterinaria/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"revision-veterinaria",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Revision Veterinaria",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/revision-veterinaria/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"revision-veterinaria",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Revision Veterinaria by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/revision-veterinaria/search?id=1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"revision-veterinaria",
+								"search"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Revisiones Veterinarias",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/revision-veterinaria/search?animalId=1&userId=1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"revision-veterinaria",
+								"search"
+							],
+							"query": [
+								{
+									"key": "animalId",
+									"value": "1"
+								},
+								{
+									"key": "userId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8080"
+		}
+	]
+}

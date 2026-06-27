@@ -18,8 +18,8 @@
   --border:#EDE7DC; --line:#F0EAE0; --field:#FCFAF6; --field-br:#E6DFD3;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:'Source Sans 3',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased}
+html{scroll-behavior:smooth;height:100%}
+body{display:flex;flex-direction:column;min-height:100vh;font-family:'Source Sans 3',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased}
 h1,h2,h3,h4{font-family:'Sora',sans-serif;letter-spacing:-.01em}
 button{font-family:inherit;cursor:pointer;border:none;background:none}
 input,select,textarea{font-family:inherit}
@@ -347,6 +347,7 @@ textarea.inp{min-height:90px;resize:vertical}
 .aitem .st{display:inline-block;margin-top:4px;font-size:10.5px;font-weight:700;padding:2px 7px;border-radius:6px}
 
 /* ---- footer ---- */
+main{flex:1}
 footer{background:#10312d;color:#cfe0db;margin-top:auto}
 .foot{padding:50px 22px 24px;max-width:1240px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:34px}
 .foot .blogo{display:flex;align-items:center;gap:11px}
@@ -626,6 +627,14 @@ footer{background:#10312d;color:#cfe0db;margin-top:auto}
   .login-deco{display:none}
   .login-card{padding:40px 28px}
 }
+
+/* ── PAGINATION ── */
+.pgn{display:flex;align-items:center;justify-content:center;gap:6px;padding:18px 0 4px;flex-wrap:wrap}
+.pgn-btn{width:34px;height:34px;border-radius:9px;border:1.5px solid var(--border);background:#fff;color:var(--ink);font-size:13.5px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.15s;font-family:inherit}
+.pgn-btn:hover:not(:disabled):not(.pgn-active){background:var(--field);border-color:#cfddd9}
+.pgn-btn.pgn-active{background:var(--teal);color:#fff;border-color:var(--teal);box-shadow:0 2px 8px rgba(15,118,110,.25)}
+.pgn-btn:disabled{opacity:.35;cursor:not-allowed}
+.pgn-info{font-size:12.5px;color:var(--muted);padding:0 6px;font-weight:600}
 </style>
 </head>
 <body>
@@ -839,6 +848,7 @@ footer{background:#10312d;color:#cfe0db;margin-top:auto}
       <div class="count" id="lostCount"></div>
     </div>
     <div class="grid" id="lostGrid"></div>
+    <div class="pgn" id="lostPgn"></div>
   </div>
 </section>
 
@@ -855,6 +865,7 @@ footer{background:#10312d;color:#cfe0db;margin-top:auto}
       <div class="count" id="foundCount"></div>
     </div>
     <div class="grid" id="foundGrid"></div>
+    <div class="pgn" id="foundPgn"></div>
   </div>
 </section>
 
@@ -872,6 +883,7 @@ footer{background:#10312d;color:#cfe0db;margin-top:auto}
       <div class="lbl"><div class="mono">mapa interactivo · refugios geolocalizados</div></div>
     </div>
     <div class="shelters" id="sheltersGrid"></div>
+    <div class="pgn" id="sheltersPgn"></div>
   </div>
 </section>
 
@@ -991,6 +1003,7 @@ footer{background:#10312d;color:#cfe0db;margin-top:auto}
             <div class="vtable" style="min-width:800px">
               <div class="vtrow vthead" style="grid-template-columns:1.6fr 1fr .8fr .8fr 1fr 1.5fr"><div>Solicitante</div><div>Animal</div><div>Tipo</div><div>Fecha evento</div><div>Estado</div><div style="text-align:right">Acciones</div></div>
               <div id="solRows"></div>
+              <div class="pgn" id="solPgn" style="padding:12px 22px 8px"></div>
             </div>
           </div>
         </div>
@@ -1011,6 +1024,7 @@ footer{background:#10312d;color:#cfe0db;margin-top:auto}
             <div class="vtable" style="min-width:740px">
               <div class="vtrow vthead" style="grid-template-columns:1.5fr 1fr .7fr .7fr 1fr 1.3fr"><div>Animal</div><div>Raza / Color</div><div>Especie</div><div>Tamaño</div><div>Rev. veterinaria</div><div style="text-align:right">Acciones</div></div>
               <div id="anRows"></div>
+              <div class="pgn" id="anPgn" style="padding:12px 22px 8px"></div>
             </div>
           </div>
         </div>
@@ -1031,6 +1045,7 @@ footer{background:#10312d;color:#cfe0db;margin-top:auto}
             <div class="vtable" style="min-width:820px">
               <div class="vtrow vthead" style="grid-template-columns:1.8fr 1.2fr .9fr .9fr .9fr 1.3fr"><div>Refugio</div><div>Responsable</div><div>Especie</div><div>Cap. perros</div><div>Cap. gatos</div><div style="text-align:right">Estado / Acción</div></div>
               <div id="reRows"></div>
+              <div class="pgn" id="rePgn" style="padding:12px 22px 8px"></div>
             </div>
           </div>
         </div>
@@ -1377,6 +1392,30 @@ footer{background:#10312d;color:#cfe0db;margin-top:auto}
 document.addEventListener('DOMContentLoaded',function(){
 (function(){
   "use strict";
+
+  /* ── PAGINATION HELPER ── */
+  function mkPgn(containerId, total, page, perPage, onChange){
+    var pages=Math.ceil(total/perPage)||1;
+    var el2=el(containerId);
+    if(!el2)return;
+    if(pages<=1){el2.innerHTML='';return;}
+    var html='';
+    html+='<button class="pgn-btn" '+(page<=1?'disabled':'')+' data-pg="'+(page-1)+'">‹</button>';
+    for(var p=1;p<=pages;p++){
+      if(pages>7 && p>2 && p<pages-1 && Math.abs(p-page)>1){
+        if(p===3||p===pages-2) html+='<span class="pgn-info">…</span>';
+        continue;
+      }
+      html+='<button class="pgn-btn'+(p===page?' pgn-active':'')+'" data-pg="'+p+'">'+p+'</button>';
+    }
+    html+='<button class="pgn-btn" '+(page>=pages?'disabled':'')+' data-pg="'+(page+1)+'">›</button>';
+    html+='<span class="pgn-info">'+((page-1)*perPage+1)+'–'+Math.min(page*perPage,total)+' de '+total+'</span>';
+    el2.innerHTML=html;
+    el2.querySelectorAll('.pgn-btn:not(:disabled)').forEach(function(b){
+      b.addEventListener('click',function(){onChange(+b.getAttribute('data-pg'));});
+    });
+  }
+
   const EMERGENCY_ACTIVE = true;
   var TINTS=[['#E3F0EE','#cfe6e2'],['#FBE7E0','#f6d3c8'],['#F1ECE0','#e5dcc9'],['#E7EAF4','#d6dcee'],['#E6F1E9','#d2e6d9'],['#F3E8F1','#e6d4e2']];
   function tint(i){return TINTS[i%TINTS.length];}
@@ -1502,35 +1541,52 @@ document.addEventListener('DOMContentLoaded',function(){
     }).join('');
   }
   var lostFilter='todos', foundFilter='todos';
+  var lostPage=1, foundPage=1, PER_PAGE=6;
   function renderLost(){
-    var list=lostFilter==='todos'?lostData:lostData.filter(function(p){return p.sk===lostFilter;});
+    var all=lostFilter==='todos'?lostData:lostData.filter(function(p){return p.sk===lostFilter;});
+    var total=all.length;
+    if(lostPage>Math.ceil(total/PER_PAGE))lostPage=1;
+    var list=all.slice((lostPage-1)*PER_PAGE, lostPage*PER_PAGE);
     el('lostChips').innerHTML=chipsHTML(lostFilter);
     el('lostGrid').innerHTML=list.map(function(p,i){return petCardHTML(p,i,'lost');}).join('');
-    el('lostCount').textContent=list.length+' resultados';
+    el('lostCount').textContent=total+' resultados';
+    mkPgn('lostPgn',total,lostPage,PER_PAGE,function(p){lostPage=p;renderLost();window.scrollTo({top:0,behavior:'smooth'});});
   }
   function renderFound(){
-    var list=foundFilter==='todos'?foundData:foundData.filter(function(p){return p.sk===foundFilter;});
+    var all=foundFilter==='todos'?foundData:foundData.filter(function(p){return p.sk===foundFilter;});
+    var total=all.length;
+    if(foundPage>Math.ceil(total/PER_PAGE))foundPage=1;
+    var list=all.slice((foundPage-1)*PER_PAGE, foundPage*PER_PAGE);
     el('foundChips').innerHTML=chipsHTML(foundFilter);
     el('foundGrid').innerHTML=list.map(function(p,i){return petCardHTML(p,i,'found');}).join('');
-    el('foundCount').textContent=list.length+' resultados';
+    el('foundCount').textContent=total+' resultados';
+    mkPgn('foundPgn',total,foundPage,PER_PAGE,function(p){foundPage=p;renderFound();window.scrollTo({top:0,behavior:'smooth'});});
   }
-  el('lostChips').addEventListener('click',function(e){var b=e.target.closest('.chip');if(!b)return;lostFilter=b.getAttribute('data-sp');renderLost();});
-  el('foundChips').addEventListener('click',function(e){var b=e.target.closest('.chip');if(!b)return;foundFilter=b.getAttribute('data-sp');renderFound();});
+  el('lostChips').addEventListener('click',function(e){var b=e.target.closest('.chip');if(!b)return;lostFilter=b.getAttribute('data-sp');lostPage=1;renderLost();});
+  el('foundChips').addEventListener('click',function(e){var b=e.target.closest('.chip');if(!b)return;foundFilter=b.getAttribute('data-sp');foundPage=1;renderFound();});
   renderLost();renderFound();
 
   /* ---------- RENDER: shelters ---------- */
+  var sheltersPage=1, SHELTERS_PER=4;
   function capColor(pct){return pct>=100?'#DC4A4A':(pct>=80?'#F26B4E':'#0F766E');}
-  el('sheltersGrid').innerHTML=shelters.map(function(s){
-    var dpct=Math.round(s.dogN/s.dogMax*100), cpct=Math.round(s.catN/s.catMax*100);
-    var spill=s.full?'<span class="spill full">Cupo lleno</span>':'<span class="spill open">Cupo disponible</span>';
-    var sv=s.services.map(function(x){return '<span class="sv">'+x[0]+' '+x[1]+'</span>';}).join('');
-    return '<div class="shelter"><div class="top"><div><h3>'+s.name+'</h3><div class="addr">📍 '+s.addr+'</div></div>'+spill+'</div>'
-      +'<div class="bars">'
-      +'<div class="bar"><div class="brow"><b>🐕 Perros</b><span>'+s.dogN+' / '+s.dogMax+'</span></div><div class="track"><div class="fill" style="width:'+dpct+'%;background:'+capColor(dpct)+'"></div></div></div>'
-      +'<div class="bar"><div class="brow"><b>🐈 Gatos</b><span>'+s.catN+' / '+s.catMax+'</span></div><div class="track"><div class="fill" style="width:'+cpct+'%;background:'+capColor(cpct)+'"></div></div></div>'
-      +'</div><div class="svchips">'+sv+'</div>'
-      +'</div>';
-  }).join('');
+  function renderShelters(){
+    var total=shelters.length;
+    if(sheltersPage>Math.ceil(total/SHELTERS_PER))sheltersPage=1;
+    var list=shelters.slice((sheltersPage-1)*SHELTERS_PER, sheltersPage*SHELTERS_PER);
+    el('sheltersGrid').innerHTML=list.map(function(s){
+      var dpct=Math.round(s.dogN/s.dogMax*100), cpct=Math.round(s.catN/s.catMax*100);
+      var spill=s.full?'<span class="spill full">Cupo lleno</span>':'<span class="spill open">Cupo disponible</span>';
+      var sv=s.services.map(function(x){return '<span class="sv">'+x[0]+' '+x[1]+'</span>';}).join('');
+      return '<div class="shelter"><div class="top"><div><h3>'+s.name+'</h3><div class="addr">📍 '+s.addr+'</div></div>'+spill+'</div>'
+        +'<div class="bars">'
+        +'<div class="bar"><div class="brow"><b>🐕 Perros</b><span>'+s.dogN+' / '+s.dogMax+'</span></div><div class="track"><div class="fill" style="width:'+dpct+'%;background:'+capColor(dpct)+'"></div></div></div>'
+        +'<div class="bar"><div class="brow"><b>🐈 Gatos</b><span>'+s.catN+' / '+s.catMax+'</span></div><div class="track"><div class="fill" style="width:'+cpct+'%;background:'+capColor(cpct)+'"></div></div></div>'
+        +'</div><div class="svchips">'+sv+'</div>'
+        +'</div>';
+    }).join('');
+    mkPgn('sheltersPgn',total,sheltersPage,SHELTERS_PER,function(p){sheltersPage=p;renderShelters();window.scrollTo({top:0,behavior:'smooth'});});
+  }
+  renderShelters();
 
   /* ---------- RENDER: adoptions ---------- */
   function healthStyle(h){return h==='Sano'?['#e7f5ef','#1b7a55']:['#fdf3e7','#b5781f'];}
@@ -1689,10 +1745,13 @@ document.addEventListener('DOMContentLoaded',function(){
   function vmSetSt(opts,val){opts.forEach(function(id){var o=el(id);if(o)o.classList.toggle('sel',o.getAttribute('data-st')===val);});}
 
   /* ══ RENDER: SOLICITUDES ══ */
-  var solFiltTp='todos',solFiltSt='todos';
+  var solFiltTp='todos',solFiltSt='todos',solPage=1,SOL_PER=5;
   function renderSol(){
-    var list=solData.filter(function(s){return(solFiltTp==='todos'||s.tp===solFiltTp)&&(solFiltSt==='todos'||s.st===solFiltSt);});
-    el('solCountPill').textContent=list.length+' registro'+(list.length!==1?'s':'');
+    var all=solData.filter(function(s){return(solFiltTp==='todos'||s.tp===solFiltTp)&&(solFiltSt==='todos'||s.st===solFiltSt);});
+    var total=all.length;
+    if(solPage>Math.ceil(total/SOL_PER)||solPage<1)solPage=1;
+    var list=all.slice((solPage-1)*SOL_PER,solPage*SOL_PER);
+    el('solCountPill').textContent=total+' registro'+(total!==1?'s':'');
     el('solRows').innerHTML=list.map(function(s,i){
       var av=AV[i%AV.length];
       var sc=solStColors(s.st);
@@ -1708,9 +1767,10 @@ document.addEventListener('DOMContentLoaded',function(){
         +'<div>'+stpill(sc[0],sc[1],sc[2])+'</div>'
         +'<div class="vtacts">'+rowActs+'</div></div>';
     }).join('')||'<div style="padding:24px 22px;color:var(--muted)">Sin resultados.</div>';
+    mkPgn('solPgn',total,solPage,SOL_PER,function(p){solPage=p;renderSol();});
   }
-  el('solFilterTp').addEventListener('change',function(){solFiltTp=this.value;renderSol();});
-  el('solFilterSt').addEventListener('change',function(){solFiltSt=this.value;renderSol();});
+  el('solFilterTp').addEventListener('change',function(){solFiltTp=this.value;solPage=1;renderSol();});
+  el('solFilterSt').addEventListener('change',function(){solFiltSt=this.value;solPage=1;renderSol();});
   el('solRows').addEventListener('click',function(e){
     var d=e.target.closest('[data-vm-sol]');if(d)return openVmSol(d.getAttribute('data-vm-sol'));
     var ap=e.target.closest('[data-sol-ap]');if(ap){updSol(ap.getAttribute('data-sol-ap'),'activa');return;}
@@ -1719,10 +1779,13 @@ document.addEventListener('DOMContentLoaded',function(){
   function updSol(id,st){for(var i=0;i<solData.length;i++){if(solData[i].id===id){solData[i].st=st;break;}}renderSol();}
 
   /* ══ RENDER: ANIMALES ══ */
-  var anFiltTp='todos',anFiltSt='todos';
+  var anFiltTp='todos',anFiltSt='todos',anPage=1,AN_PER=5;
   function renderAn(){
-    var list=anData.filter(function(a){return(anFiltTp==='todos'||a.species===anFiltTp)&&(anFiltSt==='todos'||a.vetSt===anFiltSt);});
-    el('anCountPill').textContent=list.length+' animal'+(list.length!==1?'es':'');
+    var all=anData.filter(function(a){return(anFiltTp==='todos'||a.species===anFiltTp)&&(anFiltSt==='todos'||a.vetSt===anFiltSt);});
+    var total=all.length;
+    if(anPage>Math.ceil(total/AN_PER)||anPage<1)anPage=1;
+    var list=all.slice((anPage-1)*AN_PER,anPage*AN_PER);
+    el('anCountPill').textContent=total+' animal'+(total!==1?'es':'');
     el('anRows').innerHTML=list.map(function(a,i){
       var sp=a.species==='gato'?'🐈':'🐕';
       var sc=anStColors(a.vetSt);
@@ -1740,9 +1803,10 @@ document.addEventListener('DOMContentLoaded',function(){
         +'<div>'+stpill(sc[0],sc[1],sc[2])+(a.reqVet?'<div style="margin-top:4px;font-size:10.5px;font-weight:700;color:#0F766E;background:#E3F0EE;padding:2px 6px;border-radius:6px;display:inline-block">🩺 Rev. req.</div>':'')+'</div>'
         +'<div class="vtacts">'+rowActs+'</div></div>';
     }).join('')||'<div style="padding:24px 22px;color:var(--muted)">Sin resultados.</div>';
+    mkPgn('anPgn',total,anPage,AN_PER,function(p){anPage=p;renderAn();});
   }
-  el('anFilterTp').addEventListener('change',function(){anFiltTp=this.value;renderAn();});
-  el('anFilterSt').addEventListener('change',function(){anFiltSt=this.value;renderAn();});
+  el('anFilterTp').addEventListener('change',function(){anFiltTp=this.value;anPage=1;renderAn();});
+  el('anFilterSt').addEventListener('change',function(){anFiltSt=this.value;anPage=1;renderAn();});
   el('anRows').addEventListener('click',function(e){
     var d=e.target.closest('[data-vm-an]');if(d)return openVmAn(d.getAttribute('data-vm-an'));
     var ap=e.target.closest('[data-an-ap]');if(ap){updAn(ap.getAttribute('data-an-ap'),'activo');}
@@ -1750,10 +1814,13 @@ document.addEventListener('DOMContentLoaded',function(){
   function updAn(id,st){for(var i=0;i<anData.length;i++){if(anData[i].id===id){anData[i].vetSt=st;break;}}renderAn();}
 
   /* ══ RENDER: REFUGIOS ══ */
-  var reFiltSt='todos',reFiltSp='todos';
+  var reFiltSt='todos',reFiltSp='todos',rePage=1,RE_PER=5;
   function renderRe(){
-    var list=reData.filter(function(r){return(reFiltSt==='todos'||r.st===reFiltSt)&&(reFiltSp==='todos'||r.species===reFiltSp);});
-    el('reCountPill').textContent=list.length+' refugio'+(list.length!==1?'s':'');
+    var all=reData.filter(function(r){return(reFiltSt==='todos'||r.st===reFiltSt)&&(reFiltSp==='todos'||r.species===reFiltSp);});
+    var total=all.length;
+    if(rePage>Math.ceil(total/RE_PER)||rePage<1)rePage=1;
+    var list=all.slice((rePage-1)*RE_PER,rePage*RE_PER);
+    el('reCountPill').textContent=total+' refugio'+(total!==1?'s':'');
     el('reRows').innerHTML=list.map(function(r){
       var sc=reStColors(r.st);
       var sv=r.services.length?r.services.map(function(s){return '<span class="sv">'+s+'</span>';}).join(''):'<span style="font-size:12px;color:var(--muted)">—</span>';
@@ -1769,9 +1836,10 @@ document.addEventListener('DOMContentLoaded',function(){
         +'<div>'+capBar(r.catN,r.catMax)+'</div>'
         +'<div class="vtacts" style="flex-direction:column;align-items:flex-end;gap:5px">'+stpill(sc[0],sc[1],sc[2])+rowActs+'</div></div>';
     }).join('')||'<div style="padding:24px 22px;color:var(--muted)">Sin resultados.</div>';
+    mkPgn('rePgn',total,rePage,RE_PER,function(p){rePage=p;renderRe();});
   }
-  el('reFilterSt').addEventListener('change',function(){reFiltSt=this.value;renderRe();});
-  el('reFilterSp').addEventListener('change',function(){reFiltSp=this.value;renderRe();});
+  el('reFilterSt').addEventListener('change',function(){reFiltSt=this.value;rePage=1;renderRe();});
+  el('reFilterSp').addEventListener('change',function(){reFiltSp=this.value;rePage=1;renderRe();});
   el('reRows').addEventListener('click',function(e){
     var d=e.target.closest('[data-vm-re]');if(d)return openVmRe(d.getAttribute('data-vm-re'));
     var ap=e.target.closest('[data-re-ap]');if(ap){updRe(ap.getAttribute('data-re-ap'),'activo');}

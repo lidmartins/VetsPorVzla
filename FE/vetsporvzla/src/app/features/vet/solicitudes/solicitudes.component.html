@@ -1,0 +1,45 @@
+<!-- solicitudes.component.html -->
+<div class="vmain-head">
+  <div><h1>Solicitudes</h1><p>Revisión de reportes enviados por el público</p></div>
+  <div class="filters">
+    <select (change)="filterTp.set($any($event.target).value); page.set(1)">
+      <option value="">Todos los tipos</option>
+      <option value="P">🔴 Perdidos</option>
+      <option value="E">🟢 Encontrados</option>
+    </select>
+    <select (change)="filterSt.set($any($event.target).value); page.set(1)">
+      <option value="">Todos los estados</option>
+      <option value="P">⏳ Pendientes</option>
+      <option value="A">✅ Activas</option>
+      <option value="R">❌ Rechazadas</option>
+    </select>
+  </div>
+</div>
+
+@if (result(); as data) {
+  <div class="panel">
+    <div class="panel-head">
+      <h3>Listado</h3>
+      <span class="pill-pending">{{ data.totalElements }} registros</span>
+    </div>
+    <div class="table-scroll">
+      <table class="vtable">
+        <thead><tr class="vthead">...</tr></thead>
+        <tbody>
+          @for (sol of data.content; track sol.so_cd_solicitud) {
+            <tr class="vtrow" (click)="openDetail(sol.so_cd_solicitud)">...</tr>
+          }
+        </tbody>
+      </table>
+    </div>
+    <app-pagination
+      [page]="page()"
+      [total]="data.totalElements"
+      [perPage]="perPage"
+      (pageChange)="onPageChange($event)" />
+  </div>
+}
+
+@if (selectedId()) {
+  <app-solicitud-detail [id]="selectedId()!" (close)="closeDetail()" />
+}

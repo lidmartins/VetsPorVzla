@@ -1,0 +1,51 @@
+/* You can add global styles to this file, and also import other style files */
+.overlay {
+  position: fixed; inset: 0; z-index: 60; background: rgba(16,49,45,.55);
+  backdrop-filter: blur(4px); display: none; align-items: center; justify-content: center; padding: 18px;
+  &.show { display: flex; animation: overlay 0.2s ease both; }
+}
+.modal {
+  background: var(--bg); border-radius: 22px; width: 100%; max-width: 620px; max-height: 92vh;
+  overflow: hidden; display: flex; flex-direction: column;
+  box-shadow: 0 40px 90px rgba(7,40,36,.5); animation: sheet 0.28s cubic-bezier(0.2,0.8,0.2,1) both;
+}
+.modal-head { padding: 20px 24px 0; flex-shrink: 0; .top { display: flex; align-items: center; justify-content: space-between; } .ti { display: flex; align-items: center; gap: 10px; } .ic { width: 34px; height: 34px; border-radius: 10px; background: var(--teal); display: flex; align-items: center; justify-content: center; font-size: 16px; } h3 { font-weight: 700; font-size: 18px; color: var(--head); } }
+.x { width: 34px; height: 34px; border-radius: 9px; background: var(--border); color: var(--muted); font-size: 17px; display: flex; align-items: center; justify-content: center; &:hover { background: #e2dace; } }
+.progress-wrap { margin-top: 18px; }
+.steplabels { display: flex; justify-content: space-between; margin-bottom: 8px; }
+.steplabels b, .slabel { flex: 1; text-align: center; font-size: 11.5px; font-weight: 700; color: #bcb6aa; letter-spacing: 0.02em; transition: color 0.3s; &.done { color: var(--teal); } }
+.ptrack { height: 7px; background: #EAE3D8; border-radius: 999px; overflow: hidden; }
+.pfill { height: 100%; background: linear-gradient(90deg,#0F766E,#15a59a); border-radius: 999px; width: 20%; transition: width 0.35s cubic-bezier(0.4,0,0.2,1); }
+.modal-body { padding: 24px; overflow-y: auto; flex: 1; }
+.mstep { display: none; }
+.mstep.active { display: block; animation: up 0.25s ease both; }
+.mstep h4 { font-weight: 700; font-size: 17px; color: var(--head); margin-bottom: 4px; }
+.mstep .sub { color: var(--muted); font-size: 14px; margin-bottom: 18px; }
+.modal-foot { padding: 16px 24px; border-top: 1px solid var(--border); flex-shrink: 0; display: flex; align-items: center; justify-content: space-between; gap: 12px; background: #fff; }
+.m-back { border: 1.5px solid var(--field-br); background: #fff; color: #566159; font-weight: 600; font-size: 14.5px; padding: 11px 18px; border-radius: 11px; &:hover { background: var(--field); } }
+.m-count { font-size: 13px; color: #9aa49f; font-weight: 600; }
+.m-next { background: var(--teal); color: #fff; font-weight: 700; font-size: 14.5px; padding: 11px 22px; border-radius: 11px; box-shadow: 0 5px 14px rgba(15,118,110,.3); &:hover { background: var(--teal-dk); } }
+.dropzone { border: 2px dashed #bcd6cf; background: #f0f7f5; border-radius: 16px; padding: 38px 20px; text-align: center; cursor: pointer; transition: 0.15s; &:hover, &.drag { background: #e7f2ef; border-color: var(--teal); } .em { font-size: 42px; } b { font-weight: 700; font-size: 16px; color: var(--head); margin-top: 10px; display: block; } small { font-size: 13.5px; color: var(--muted); } }
+.thumbs { display: flex; gap: 10px; margin-top: 14px; }
+.thumb { flex: 1; height: 74px; border-radius: 11px; background: linear-gradient(140deg,#E3F0EE,#cfe6e2); display: flex; align-items: center; justify-content: center; font-size: 24px; opacity: 0.7; &.empty { background: none; border: 1.5px dashed #d9d2c7; color: #bcb6aa; } }
+.success { text-align: center; padding: 18px 10px; .circle { width: 78px; height: 78px; border-radius: 50%; background: #e7f5ef; display: flex; align-items: center; justify-content: center; font-size: 40px; margin: 0 auto; animation: pop 0.4s cubic-bezier(0.2,0.9,0.3,1.3) both; } h3 { font-weight: 800; font-size: 23px; color: var(--head); margin-top: 18px; } p { color: #566159; font-size: 15px; margin-top: 8px; max-width: 400px; margin: 8px auto 0; } .info { background: #fff; border: 1px solid var(--border); border-radius: 13px; padding: 14px 18px; margin: 22px auto 0; max-width: 340px; display: flex; align-items: center; gap: 12px; text-align: left; } }
+
+// Vet detail modals
+.vmodal-overlay { position: fixed; inset: 0; z-index: 70; background: rgba(16,49,45,.58); backdrop-filter: blur(5px); display: none; align-items: center; justify-content: center; padding: 18px; &.show { display: flex; animation: overlay 0.2s ease both; } }
+.vmodal { background: var(--bg); border-radius: 22px; width: 100%; max-width: 660px; max-height: 93vh; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 40px 90px rgba(7,40,36,.55); animation: sheet 0.28s cubic-bezier(0.2,0.8,0.2,1) both; }
+.vmodal-head { padding: 18px 24px; flex-shrink: 0; border-bottom: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; gap: 12px; .ti { display: flex; align-items: center; gap: 10px; } .ic { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 17px; flex-shrink: 0; } h3 { font-weight: 700; font-size: 18px; color: var(--head); } small { font-size: 12px; color: var(--muted); } }
+.vmodal-body { overflow-y: auto; flex: 1; }
+.vmodal-foot { padding: 14px 24px; border-top: 1px solid var(--border); flex-shrink: 0; display: flex; align-items: center; gap: 10px; background: #fff; flex-wrap: wrap; }
+.vm-sec { padding: 18px 24px; border-bottom: 1px solid var(--line); &:last-child { border-bottom: none; } }
+.vm-sec-title { font-size: 11px; font-weight: 800; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+.vm-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 20px; &.g3 { grid-template-columns: 1fr 1fr 1fr; } }
+.vm-field { label { font-size: 11px; font-weight: 700; color: var(--muted); letter-spacing: 0.04em; text-transform: uppercase; display: block; margin-bottom: 2px; } span { font-size: 14px; color: var(--ink); } span.em { font-weight: 700; color: var(--head); font-size: 15px; } }
+.vm-photo { height: 120px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 52px; position: relative; overflow: hidden; }
+.vm-photo-lbl { position: absolute; bottom: 8px; right: 10px; font-size: 10px; font-weight: 700; color: rgba(255,255,255,.65); letter-spacing: 0.04em; text-transform: uppercase; }
+.vm-st-picker { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+
+@media (max-width: 600px) {
+  .modal-head { padding: 14px 16px 10px; }
+  .modal-body { padding: 14px 16px; }
+  .modal-foot { padding: 10px 16px 16px; }
+}

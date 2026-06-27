@@ -1,0 +1,17 @@
+<!-- vet-layout.component.html -->
+<div class="vetlayout wrap">
+  <aside class="sidebar">
+    <div class="sb-user">
+      <div class="av">🩺</div>
+      <div><b>Dra. Patricia Salas</b><small>MV · Aragua</small></div>
+    </div>
+    <nav class="sb-menu">
+      <a class="sb-item" routerLink="dashboard"    routerLinkActive="active">📊 Panel</a>
+      <a class="sb-item" routerLink="solicitudes"  routerLinkActive="active">📥 Solicitudes</a>
+      <a class="sb-item" routerLink="animales"     routerLinkActive="active">🐾 Animales</a>
+      <a class="sb-item" routerLink="refugios"     routerLinkActive="active">🏠 Refugios</a>
+    </nav>
+    <button class="sb-exit" (click)="logout()">← Salir del panel</button>
+  </aside>
+  <main><router-outlet /></main>
+</div>

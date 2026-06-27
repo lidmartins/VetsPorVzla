@@ -1,0 +1,14 @@
+/* You can add global styles to this file, and also import other style files */
+.table { min-width: 680px; }
+.trow { display: grid; grid-template-columns: 1.4fr 1fr 0.9fr 1fr 1.5fr; gap: 12px; padding: 14px 22px; border-top: 1px solid #F4EFE7; align-items: center; .who { display: flex; align-items: center; gap: 10px; } .av { width: 34px; height: 34px; border-radius: 50%; font-weight: 700; font-size: 13px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; } .animal { font-size: 14px; color: #33403c; font-weight: 600; } .date { font-size: 13.5px; color: var(--soft); } .acts { display: flex; gap: 6px; justify-content: flex-end; } }
+.thead { padding: 11px 22px; background: #FCFAF6; font-size: 12px; font-weight: 700; color: #9aa49f; letter-spacing: 0.04em; text-transform: uppercase; border-top: none; }
+.vtable { width: 100%; }
+.vtrow { display: grid; gap: 12px; padding: 13px 22px; border-top: 1px solid #F4EFE7; align-items: center; .who { display: flex; align-items: center; gap: 10px; } .av { width: 34px; height: 34px; border-radius: 50%; font-weight: 700; font-size: 13px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; } }
+.vthead { padding: 10px 22px; background: #FCFAF6; font-size: 11.5px; font-weight: 700; color: #9aa49f; letter-spacing: 0.04em; text-transform: uppercase; border-top: none; }
+.vtacts { display: flex; gap: 6px; justify-content: flex-end; flex-wrap: wrap; }
+.resolved { font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 5px; }
+.table-scroll { overflow-x: auto; }
+.panel { background: #fff; border: 1px solid var(--border); border-radius: 18px; margin-top: 20px; overflow: hidden; box-shadow: 0 1px 2px rgba(28,43,42,.04); }
+.panel-head { display: flex; align-items: center; justify-content: space-between; padding: 18px 22px; border-bottom: 1px solid var(--line); h3 { font-weight: 700; font-size: 17px; color: var(--head); } }
+.cap-bar  { height: 6px; border-radius: 4px; background: #EDE7DC; margin-top: 4px; overflow: hidden; }
+.cap-fill { height: 100%; border-radius: 4px; }

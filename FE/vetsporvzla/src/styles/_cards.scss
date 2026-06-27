@@ -1,0 +1,58 @@
+/* You can add global styles to this file, and also import other style files */
+// Pet cards
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(248px,1fr)); gap: 18px; margin-top: 22px; }
+.pet { background: #fff; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; box-shadow: 0 1px 2px rgba(28,43,42,.04); transition: 0.18s; &:hover { transform: translateY(-4px); box-shadow: 0 14px 30px rgba(28,43,42,.12); } .photo { position: relative; height: 182px; display: flex; align-items: center; justify-content: center; } .photo .pw { font-size: 54px; opacity: 0.4; } .body { padding: 15px 16px; } .pname { font-weight: 700; font-size: 18px; color: var(--head); } .breed { font-size: 13px; color: var(--soft); } }
+.statuschip { position: absolute; bottom: 9px; left: 11px; background: rgba(255,255,255,.92); color: #33403c; font-size: 11px; font-weight: 600; padding: 4px 9px; border-radius: 999px; display: flex; align-items: center; gap: 5px; }
+.meta { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--muted); margin-top: 10px; &.t { color: #9aa49f; margin-top: 3px; } }
+.actions { display: flex; gap: 8px; margin-top: 14px; }
+.act { flex: 1; color: #fff; font-weight: 600; font-size: 13px; padding: 9px; border-radius: 9px; display: flex; align-items: center; justify-content: center; gap: 5px; transition: 0.15s; &.call { background: var(--teal); &:hover { background: var(--teal-dk); } } &.wa { background: #25864e; &:hover { background: #1f6f41; } } }
+.share { width: 100%; border: 1.5px solid var(--field-br); background: #fff; color: var(--muted); font-weight: 600; font-size: 13px; padding: 8px; border-radius: 9px; margin-top: 8px; display: flex; align-items: center; justify-content: center; gap: 6px; transition: 0.15s; &:hover { background: var(--field); border-color: #d9d2c7; } }
+
+// Shelters
+.shelters { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px,1fr)); gap: 18px; margin-top: 22px; }
+.shelter { background: #fff; border: 1px solid var(--border); border-radius: 18px; padding: 20px; box-shadow: 0 1px 2px rgba(28,43,42,.04); transition: 0.18s; &:hover { box-shadow: 0 14px 30px rgba(28,43,42,.1); } .top { display: flex; align-items: start; justify-content: space-between; gap: 10px; } h3 { font-weight: 700; font-size: 19px; color: var(--head); } .addr { display: flex; align-items: center; gap: 6px; font-size: 13.5px; color: var(--muted); margin-top: 5px; } }
+.bars { margin-top: 18px; display: flex; flex-direction: column; gap: 13px; }
+.bar { .brow { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 5px; } .brow b { font-weight: 600; color: #33403c; } .brow span { color: var(--soft); } }
+.track { height: 9px; background: var(--border); border-radius: 999px; overflow: hidden; }
+.fill  { height: 100%; border-radius: 999px; transition: width 0.6s ease; }
+.svchips { display: flex; gap: 7px; flex-wrap: wrap; margin-top: 18px; }
+.sv { background: #F0F7F5; color: var(--teal); font-size: 12.5px; font-weight: 600; padding: 5px 11px; border-radius: 8px; display: flex; align-items: center; gap: 5px; }
+
+// Adoption
+.adopt-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(252px,1fr)); gap: 18px; margin-top: 24px; }
+.acard { background: #fff; border: 1px solid var(--border); border-radius: 18px; overflow: hidden; box-shadow: 0 1px 2px rgba(28,43,42,.04); transition: 0.18s; &:hover { transform: translateY(-4px); box-shadow: 0 16px 32px rgba(28,43,42,.12); } .photo { position: relative; height: 190px; display: flex; align-items: center; justify-content: center; } .photo .pw { font-size: 56px; opacity: 0.4; } .body { padding: 16px; } .pname { font-weight: 700; font-size: 19px; color: var(--head); } .age { font-size: 12.5px; color: #9aa49f; } }
+.sbadge { position: absolute; top: 11px; left: 11px; color: #fff; font-size: 11px; font-weight: 700; letter-spacing: 0.04em; padding: 5px 10px; border-radius: 999px; }
+.tags { display: flex; gap: 7px; margin-top: 10px; flex-wrap: wrap; }
+.tag { font-size: 12px; font-weight: 600; padding: 4px 9px; border-radius: 7px; &.size { background: #F4F0E8; color: var(--muted); } }
+.vetseal { display: flex; align-items: center; gap: 7px; margin-top: 13px; background: #e7f5ef; border: 1px solid #cfe9df; border-radius: 9px; padding: 8px 10px; span { font-size: 12.5px; font-weight: 600; color: #1b7a55; } }
+.btn-adopt { width: 100%; background: var(--adopt); color: #fff; font-weight: 600; font-size: 14px; padding: 11px; border-radius: 10px; margin-top: 13px; display: flex; align-items: center; justify-content: center; gap: 7px; box-shadow: 0 5px 14px rgba(126,91,208,.3); transition: 0.15s; &:hover { transform: translateY(-1px); } }
+
+// Feature cards
+.feat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(232px,1fr)); gap: 18px; margin-top: 26px; }
+.feat { background: #fff; border: 1px solid var(--border); border-radius: 18px; padding: 24px 22px; cursor: pointer; transition: 0.18s; position: relative; overflow: hidden; &:hover { transform: translateY(-5px); box-shadow: 0 18px 36px rgba(28,43,42,.1); } .paww { position: absolute; top: -14px; right: -8px; font-size: 64px; opacity: 0.06; } .ic { width: 48px; height: 48px; border-radius: 13px; display: flex; align-items: center; justify-content: center; font-size: 23px; margin-bottom: 16px; } h3 { font-weight: 700; font-size: 18px; color: var(--head); } p { color: var(--muted); font-size: 14.5px; margin-top: 7px; } .go { margin-top: 15px; font-weight: 700; font-size: 14px; display: flex; align-items: center; gap: 6px; } }
+
+// Stat cards (vet)
+.statgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); gap: 14px; }
+.stat { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 18px 20px; box-shadow: 0 1px 2px rgba(28,43,42,.04); .r { display: flex; align-items: center; justify-content: space-between; } .ic { width: 38px; height: 38px; border-radius: 11px; display: flex; align-items: center; justify-content: center; font-size: 19px; } .delta { font-size: 12px; font-weight: 700; } .n { font-weight: 800; font-size: 30px; color: var(--head); margin-top: 12px; } .l { color: #8a938d; font-size: 13.5px; font-weight: 500; } }
+
+// Vet animal mini list
+.animals { background: #fff; border: 1px solid var(--border); border-radius: 18px; margin-top: 20px; padding: 20px 22px; box-shadow: 0 1px 2px rgba(28,43,42,.04); }
+.animals .h { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; h3 { font-weight: 700; font-size: 17px; color: var(--head); } }
+.aglist { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px,1fr)); gap: 13px; }
+.aitem { border: 1px solid var(--line); border-radius: 13px; padding: 12px; display: flex; align-items: center; gap: 11px; .av { width: 46px; height: 46px; border-radius: 11px; display: flex; align-items: center; justify-content: center; font-size: 21px; flex-shrink: 0; } b { font-weight: 700; font-size: 14px; color: #33403c; } small { font-size: 12px; color: #9aa49f; display: block; } .st { display: inline-block; margin-top: 4px; font-size: 10.5px; font-weight: 700; padding: 2px 7px; border-radius: 6px; } }
+
+// Latest strip (home)
+.strip { display: flex; gap: 16px; overflow-x: auto; padding: 4px 2px 16px; scroll-snap-type: x mandatory; &::-webkit-scrollbar { height: 6px; } }
+.mini { flex: 0 0 230px; scroll-snap-align: start; background: #fff; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; box-shadow: 0 1px 2px rgba(28,43,42,.04); transition: 0.18s; &:hover { transform: translateY(-4px); box-shadow: 0 14px 30px rgba(28,43,42,.12); } .photo { position: relative; height: 140px; display: flex; align-items: center; justify-content: center; } .photo .pw { font-size: 46px; opacity: 0.4; } .body { padding: 13px 14px; } .name { font-weight: 700; font-size: 16px; color: var(--head); } }
+
+@media (max-width: 600px) {
+  .grid { grid-template-columns: 1fr; gap: 14px; }
+  .pet .photo { height: 160px; }
+  .shelter { padding: 18px 16px; }
+  .mini { flex: 0 0 200px; }
+  .feat-grid { grid-template-columns: 1fr; gap: 14px; }
+  .statgrid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 400px) {
+  .statgrid { grid-template-columns: 1fr; }
+}

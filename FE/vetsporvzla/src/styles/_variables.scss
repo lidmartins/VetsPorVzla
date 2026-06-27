@@ -1,0 +1,31 @@
+/* You can add global styles to this file, and also import other style files */
+// ── CSS custom properties (design tokens) ──
+:root {
+  --teal:     #0F766E;
+  --teal-dk:  #0c5f59;
+  --coral:    #F26B4E;
+  --coral-dk: #e0573b;
+  --lost:     #DC4A4A;
+  --found:    #2F9E63;
+  --adopt:    #7E5BD0;
+  --bg:       #FAF7F2;
+  --ink:      #1C2B2A;
+  --head:     #163b37;
+  --muted:    #6b756f;
+  --soft:     #8a938d;
+  --border:   #EDE7DC;
+  --line:     #F0EAE0;
+  --field:    #FCFAF6;
+  --field-br: #E6DFD3;
+}
+
+// ── SCSS vars (for use in component files) ──
+$teal:    var(--teal);
+$coral:   var(--coral);
+$bg:      var(--bg);
+$head:    var(--head);
+$border:  var(--border);
+
+// Breakpoints
+$bp-tablet: 860px;
+$bp-mobile: 600px;

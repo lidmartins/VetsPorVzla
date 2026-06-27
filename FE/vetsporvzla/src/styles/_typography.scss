@@ -1,0 +1,20 @@
+/* You can add global styles to this file, and also import other style files */
+// Shared typographic utilities used across views
+.eyebrow {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.dot {
+  display: inline-block;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+}
+.mono {
+  font-family: ui-monospace, Menlo, monospace;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  color: rgba(28, 43, 42, 0.5);
+}

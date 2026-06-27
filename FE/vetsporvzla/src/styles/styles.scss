@@ -1,0 +1,35 @@
+@use 'variables';
+@use 'typography';
+@use 'layout';
+@use 'animations';
+@use 'buttons';
+@use 'badges';
+@use 'forms';
+@use 'modal';
+@use 'table';
+@use 'cards';
+@use 'pagination';
+
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; height: 100%; }
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: 'Source Sans 3', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+h1,h2,h3,h4 { font-family: 'Sora', sans-serif; letter-spacing: -0.01em; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; }
+input, select, textarea { font-family: inherit; }
+a { color: inherit; }
+main { flex: 1; }
+
+::-webkit-scrollbar { height: 9px; width: 9px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #d9d2c7; border-radius: 8px; }

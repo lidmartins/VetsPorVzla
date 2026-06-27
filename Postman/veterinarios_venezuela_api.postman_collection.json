@@ -1162,6 +1162,20 @@
 			]
 		}
 	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.request.headers.upsert({",
+					"    key: 'correlation-id',",
+					"    value: pm.variables.replaceIn('{{$guid}}')",
+					"});"
+				]
+			}
+		}
+	],
 	"variable": [
 		{
 			"key": "base_url",

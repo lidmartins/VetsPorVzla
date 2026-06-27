@@ -9,6 +9,7 @@ This repository contains the complete backend infrastructure for the Veterinario
 - **RESTful API**: Provides full CRUD (Create, Read, Update, Delete) endpoints for all major database tables.
 - **Ready for Testing**: Includes a pre-configured Postman collection for immediate API testing.
 - **Idempotent SQL Scripts**: Database scripts are designed to be safely re-runnable.
+- **Request Tracing**: Includes a correlation ID (`correlation-id`) for end-to-end request tracking in logs.
 
 ---
 
@@ -109,11 +110,9 @@ A Postman collection is included to make testing the API simple and straightforw
 
 1.  The collection uses a `{{base_url}}` variable, which is pre-configured to `http://localhost:8080`.
 2.  Expand the collection to see folders organized by resource (e.g., `role`, `user`, `animal`).
-3.  Each folder contains pre-built requests for all CRUD operations:
-    - **POST**: Create a new resource. The request body contains a sample JSON payload.
-    - **PUT**: Update an existing resource by ID.
-    - **DELETE**: Delete a resource by ID.
-    - **GET (by ID)**: Fetches a single resource.
-    - **GET (Search)**: Performs a search with optional query parameters.
+3.  Each folder contains pre-built requests for all CRUD operations.
+4.  To trace a request, add a header to your request in Postman:
+    - **Key**: `correlation-id`
+    - **Value**: A unique string (e.g., a UUID, `test-id-123`)
 
-You can now send requests to your running Spring Boot application and see the results.
+If you do not provide a `correlation-id`, the backend will automatically generate one for you. This ID will appear in all log messages related to the request.

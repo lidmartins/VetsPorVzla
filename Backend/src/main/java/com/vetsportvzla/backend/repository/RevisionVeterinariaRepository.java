@@ -1,10 +1,12 @@
 package com.vetsportvzla.backend.repository;
 
 import com.vetsportvzla.backend.dto.RevisionVeterinariaDto;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,40 +21,43 @@ public class RevisionVeterinariaRepository {
 
     public RevisionVeterinariaDto createRevisionVeterinaria(RevisionVeterinariaDto revision) {
         SimpleJdbcCall jdbcCall = new SimpleJdbcCall(jdbcTemplate)
-                .withProcedureName("sp_revision_veterinaria_insert");
+                .withProcedureName("sp_revision_veterinaria_insert")
+                .returningResultSet("revision", BeanPropertyRowMapper.newInstance(RevisionVeterinariaDto.class));
 
-        Map<String, Object> inParams = Map.of(
-                "p_rv_an_cd_animal", revision.getRvAnCdAnimal(),
-                "p_rv_us_cd_user", revision.getRvUsCdUser(),
-                "p_rv_st_vet_review", revision.getRvStVetReview(),
-                "p_rv_de_comment", revision.getRvDeComment()
-        );
+        Map<String, Object> inParams = new HashMap<>();
+        inParams.put("p_rv_an_cd_animal", revision.getRvAnCdAnimal());
+        inParams.put("p_rv_us_cd_user", revision.getRvUsCdUser());
+        inParams.put("p_rv_st_vet_review", revision.getRvStVetReview());
+        inParams.put("p_rv_de_comment", revision.getRvDeComment());
 
-        jdbcCall.execute(inParams);
-        return revision;
+        Map<String, Object> out = jdbcCall.execute(inParams);
+        List<RevisionVeterinariaDto> revisiones = (List<RevisionVeterinariaDto>) out.get("revision");
+        return revisiones.get(0);
     }
 
     public RevisionVeterinariaDto updateRevisionVeterinaria(RevisionVeterinariaDto revision) {
         SimpleJdbcCall jdbcCall = new SimpleJdbcCall(jdbcTemplate)
-                .withProcedureName("sp_revision_veterinaria_update");
+                .withProcedureName("sp_revision_veterinaria_update")
+                .returningResultSet("revision", BeanPropertyRowMapper.newInstance(RevisionVeterinariaDto.class));
 
-        Map<String, Object> inParams = Map.of(
-                "p_rv_cd_revision_vet", revision.getRvCdRevisionVet(),
-                "p_rv_an_cd_animal", revision.getRvAnCdAnimal(),
-                "p_rv_us_cd_user", revision.getRvUsCdUser(),
-                "p_rv_st_vet_review", revision.getRvStVetReview(),
-                "p_rv_de_comment", revision.getRvDeComment()
-        );
+        Map<String, Object> inParams = new HashMap<>();
+        inParams.put("p_rv_cd_revision_vet", revision.getRvCdRevisionVet());
+        inParams.put("p_rv_an_cd_animal", revision.getRvAnCdAnimal());
+        inParams.put("p_rv_us_cd_user", revision.getRvUsCdUser());
+        inParams.put("p_rv_st_vet_review", revision.getRvStVetReview());
+        inParams.put("p_rv_de_comment", revision.getRvDeComment());
 
-        jdbcCall.execute(inParams);
-        return revision;
+        Map<String, Object> out = jdbcCall.execute(inParams);
+        List<RevisionVeterinariaDto> revisiones = (List<RevisionVeterinariaDto>) out.get("revision");
+        return revisiones.get(0);
     }
 
     public void deleteRevisionVeterinaria(int revisionId) {
         SimpleJdbcCall jdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withProcedureName("sp_revision_veterinaria_delete");
 
-        Map<String, Object> inParams = Map.of("p_rv_cd_revision_vet", revisionId);
+        Map<String, Object> inParams = new HashMap<>();
+        inParams.put("p_rv_cd_revision_vet", revisionId);
 
         jdbcCall.execute(inParams);
     }
@@ -60,24 +65,13 @@ public class RevisionVeterinariaRepository {
     public List<RevisionVeterinariaDto> searchRevisionesVeterinarias(Integer revisionId, Integer animalId, Integer userId, String status) {
         SimpleJdbcCall jdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withProcedureName("sp_revision_veterinaria_search")
-                .returningResultSet("revisiones", (rs, rowNum) -> {
-                    RevisionVeterinariaDto revision = new RevisionVeterinariaDto();
-                    revision.setRvCdRevisionVet(rs.getInt("rv_cd_revision_vet"));
-                    revision.setRvAnCdAnimal(rs.getInt("rv_an_cd_animal"));
-                    revision.setRvUsCdUser(rs.getInt("rv_us_cd_user"));
-                    revision.setRvStVetReview(rs.getString("rv_st_vet_review"));
-                    revision.setRvDeComment(rs.getString("rv_de_comment"));
-                    revision.setRvDtCreated(rs.getDate("rv_dt_created"));
-                    revision.setRvDtUpdated(rs.getDate("rv_dt_updated"));
-                    return revision;
-                });
+                .returningResultSet("revisiones", BeanPropertyRowMapper.newInstance(RevisionVeterinariaDto.class));
 
-        Map<String, Object> inParams = Map.of(
-                "p_rv_cd_revision_vet", revisionId,
-                "p_rv_an_cd_animal", animalId,
-                "p_rv_us_cd_user", userId,
-                "p_rv_st_vet_review", status
-        );
+        Map<String, Object> inParams = new HashMap<>();
+        inParams.put("p_rv_cd_revision_vet", revisionId);
+        inParams.put("p_rv_an_cd_animal", animalId);
+        inParams.put("p_rv_us_cd_user", userId);
+        inParams.put("p_rv_st_vet_review", status);
 
         Map<String, Object> out = jdbcCall.execute(inParams);
         return (List<RevisionVeterinariaDto>) out.get("revisiones");

@@ -1,10 +1,12 @@
 package com.vetsportvzla.backend.repository;
 
 import com.vetsportvzla.backend.dto.RoleDto;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,36 +21,39 @@ public class RoleRepository {
 
     public RoleDto createRole(RoleDto role) {
         SimpleJdbcCall jdbcCall = new SimpleJdbcCall(jdbcTemplate)
-                .withProcedureName("sp_role_insert");
+                .withProcedureName("sp_role_insert")
+                .returningResultSet("role", BeanPropertyRowMapper.newInstance(RoleDto.class));
 
-        Map<String, Object> inParams = Map.of(
-                "p_ro_nm_role", role.getRoNmRole(),
-                "p_ro_st_role", role.getRoStRole()
-        );
+        Map<String, Object> inParams = new HashMap<>();
+        inParams.put("p_ro_nm_role", role.getRoNmRole());
+        inParams.put("p_ro_st_role", role.getRoStRole());
 
-        jdbcCall.execute(inParams);
-        return role;
+        Map<String, Object> out = jdbcCall.execute(inParams);
+        List<RoleDto> roles = (List<RoleDto>) out.get("role");
+        return roles.get(0);
     }
 
     public RoleDto updateRole(RoleDto role) {
         SimpleJdbcCall jdbcCall = new SimpleJdbcCall(jdbcTemplate)
-                .withProcedureName("sp_role_update");
+                .withProcedureName("sp_role_update")
+                .returningResultSet("role", BeanPropertyRowMapper.newInstance(RoleDto.class));
 
-        Map<String, Object> inParams = Map.of(
-                "p_ro_cd_role", role.getRoCdRole(),
-                "p_ro_nm_role", role.getRoNmRole(),
-                "p_ro_st_role", role.getRoStRole()
-        );
+        Map<String, Object> inParams = new HashMap<>();
+        inParams.put("p_ro_cd_role", role.getRoCdRole());
+        inParams.put("p_ro_nm_role", role.getRoNmRole());
+        inParams.put("p_ro_st_role", role.getRoStRole());
 
-        jdbcCall.execute(inParams);
-        return role;
+        Map<String, Object> out = jdbcCall.execute(inParams);
+        List<RoleDto> roles = (List<RoleDto>) out.get("role");
+        return roles.get(0);
     }
 
     public void deleteRole(int roleId) {
         SimpleJdbcCall jdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withProcedureName("sp_role_delete");
 
-        Map<String, Object> inParams = Map.of("p_ro_cd_role", roleId);
+        Map<String, Object> inParams = new HashMap<>();
+        inParams.put("p_ro_cd_role", roleId);
 
         jdbcCall.execute(inParams);
     }
@@ -56,21 +61,12 @@ public class RoleRepository {
     public List<RoleDto> searchRoles(Integer roleId, String name, String status) {
         SimpleJdbcCall jdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withProcedureName("sp_role_search")
-                .returningResultSet("roles", (rs, rowNum) -> {
-                    RoleDto role = new RoleDto();
-                    role.setRoCdRole(rs.getInt("ro_cd_role"));
-                    role.setRoNmRole(rs.getString("ro_nm_role"));
-                    role.setRoStRole(rs.getString("ro_st_role"));
-                    role.setRoDtCreated(rs.getDate("ro_dt_created"));
-                    role.setRoDtUpdated(rs.getDate("ro_dt_updated"));
-                    return role;
-                });
+                .returningResultSet("roles", BeanPropertyRowMapper.newInstance(RoleDto.class));
 
-        Map<String, Object> inParams = Map.of(
-                "p_ro_cd_role", roleId,
-                "p_ro_nm_role", name,
-                "p_ro_st_role", status
-        );
+        Map<String, Object> inParams = new HashMap<>();
+        inParams.put("p_ro_cd_role", roleId);
+        inParams.put("p_ro_nm_role", name);
+        inParams.put("p_ro_st_role", status);
 
         Map<String, Object> out = jdbcCall.execute(inParams);
         return (List<RoleDto>) out.get("roles");

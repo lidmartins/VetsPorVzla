@@ -377,6 +377,7 @@ END$$
 DROP PROCEDURE IF EXISTS sp_animal_insert$$
 CREATE PROCEDURE sp_animal_insert(
     IN p_an_re_cd_refugio INT UNSIGNED,
+    IN p_an_report_type CHAR(1),
     IN p_an_nm_animal VARCHAR(100),
     IN p_an_tp_animal CHAR(1),
     IN p_an_de_breed VARCHAR(100),
@@ -387,20 +388,22 @@ CREATE PROCEDURE sp_animal_insert(
     IN p_an_de_animal TEXT,
     IN p_an_in_require_vet_review CHAR(1),
     IN p_an_de_observacion_vet TEXT,
-    IN p_an_st_vet_review CHAR(1)
+    IN p_an_st_vet_review CHAR(1),
+    IN p_an_ubicacion VARCHAR(255),
+    IN p_an_telefono VARCHAR(20)
 )
 BEGIN
     INSERT INTO animal (
-        an_re_cd_refugio, an_nm_animal, an_tp_animal, an_de_breed, an_de_color,
+        an_re_cd_refugio, an_report_type, an_nm_animal, an_tp_animal, an_de_breed, an_de_color,
         an_tp_size, an_tp_sex, an_nu_approx_age, an_de_animal,
         an_in_require_vet_review, an_de_observacion_vet, an_st_vet_review,
-        an_dt_created, an_dt_updated
+        an_ubicacion, an_telefono, an_dt_created, an_dt_updated
     ) VALUES (
-        p_an_re_cd_refugio, p_an_nm_animal, p_an_tp_animal, p_an_de_breed, p_an_de_color,
-        p_an_tp_size, p_an_tp_sex, p_an_nu_approx_age, p_an_de_animal,
-        p_an_in_require_vet_review, p_an_de_observacion_vet, p_an_st_vet_review,
-        NOW(), NOW()
-    );
+                 p_an_re_cd_refugio, p_an_report_type, p_an_nm_animal, p_an_tp_animal, p_an_de_breed, p_an_de_color,
+                 p_an_tp_size, p_an_tp_sex, p_an_nu_approx_age, p_an_de_animal,
+                 p_an_in_require_vet_review, p_an_de_observacion_vet, IFNULL(p_an_st_vet_review, 'P'),
+                 p_an_ubicacion, p_an_telefono, NOW(), NOW()
+             );
     SELECT * FROM animal WHERE an_cd_animal = LAST_INSERT_ID();
 END$$
 
@@ -408,6 +411,7 @@ DROP PROCEDURE IF EXISTS sp_animal_update$$
 CREATE PROCEDURE sp_animal_update(
     IN p_an_cd_animal INT UNSIGNED,
     IN p_an_re_cd_refugio INT UNSIGNED,
+    IN p_an_report_type CHAR(1),
     IN p_an_nm_animal VARCHAR(100),
     IN p_an_tp_animal CHAR(1),
     IN p_an_de_breed VARCHAR(100),
@@ -418,12 +422,15 @@ CREATE PROCEDURE sp_animal_update(
     IN p_an_de_animal TEXT,
     IN p_an_in_require_vet_review CHAR(1),
     IN p_an_de_observacion_vet TEXT,
-    IN p_an_st_vet_review CHAR(1)
+    IN p_an_st_vet_review CHAR(1),
+    IN p_an_ubicacion VARCHAR(255),
+    IN p_an_telefono VARCHAR(20)
 )
 BEGIN
     UPDATE animal
     SET
         an_re_cd_refugio = IFNULL(p_an_re_cd_refugio, an_re_cd_refugio),
+        an_report_type = IFNULL(p_an_report_type, an_report_type),
         an_nm_animal = IFNULL(p_an_nm_animal, an_nm_animal),
         an_tp_animal = IFNULL(p_an_tp_animal, an_tp_animal),
         an_de_breed = IFNULL(p_an_de_breed, an_de_breed),
@@ -435,6 +442,8 @@ BEGIN
         an_in_require_vet_review = IFNULL(p_an_in_require_vet_review, an_in_require_vet_review),
         an_de_observacion_vet = IFNULL(p_an_de_observacion_vet, an_de_observacion_vet),
         an_st_vet_review = IFNULL(p_an_st_vet_review, an_st_vet_review),
+        an_ubicacion = IFNULL(p_an_ubicacion, an_ubicacion),
+        an_telefono = IFNULL(p_an_telefono, an_telefono),
         an_dt_updated = NOW()
     WHERE
         an_cd_animal = p_an_cd_animal;

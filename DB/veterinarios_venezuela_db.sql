@@ -145,6 +145,7 @@ DROP TABLE IF EXISTS animal;
 CREATE TABLE IF NOT EXISTS animal (
   an_cd_animal            INT UNSIGNED    NOT NULL AUTO_INCREMENT,
   an_re_cd_refugio        INT UNSIGNED        NULL COMMENT 'FK → refugio.re_cd_refugio (optional)',
+  an_report_type          CHAR(1)         NOT NULL COMMENT 'P=Perdida | E=Encontrada',
   an_nm_animal            VARCHAR(100)        NULL COMMENT 'Name of the animal (optional)',
   an_tp_animal            CHAR(1)          NULL COMMENT 'G=Gato | P=Perro',
   an_de_breed             VARCHAR(100)        NULL,
@@ -156,6 +157,8 @@ CREATE TABLE IF NOT EXISTS animal (
   an_in_require_vet_review CHAR(1)         NULL COMMENT 'S=Si | N=No',
   an_de_observacion_vet   TEXT                NULL COMMENT 'Observacion from vet',
   an_st_vet_review        CHAR(1)          NULL DEFAULT 'P' COMMENT 'P=Pendiente | A=Activo | R=Revisado',
+  an_ubicacion            VARCHAR(255)     NOT NULL,
+  an_telefono             VARCHAR(20)      NOT NULL,
   an_dt_created           DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP,
   an_dt_updated           DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 
@@ -163,6 +166,7 @@ CREATE TABLE IF NOT EXISTS animal (
   CONSTRAINT fk_animal_refugio      FOREIGN KEY (an_re_cd_refugio)
                                       REFERENCES refugio (re_cd_refugio)
                                       ON UPDATE CASCADE ON DELETE SET NULL,
+  CONSTRAINT ck_animal_report_type  CHECK (an_report_type IN ('P','E')),
   CONSTRAINT ck_animal_tp           CHECK (an_tp_animal IN ('G','P')),
   CONSTRAINT ck_animal_size         CHECK (an_tp_size IN ('P','M','G')),
   CONSTRAINT ck_animal_sex          CHECK (an_tp_sex IN ('M','H')),
@@ -170,7 +174,7 @@ CREATE TABLE IF NOT EXISTS animal (
   CONSTRAINT ck_animal_vet_st       CHECK (an_st_vet_review IN ('P','A','R'))
 ) ENGINE=InnoDB
   CHARACTER SET utf8mb4
-  COLLATE utf8mb4_unicode_ci
+    COLLATE utf8mb4_unicode_ci
   COMMENT='Animals registered on the platform';
 
 

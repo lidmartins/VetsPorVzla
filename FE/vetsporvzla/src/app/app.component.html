@@ -116,39 +116,44 @@
           <div class="form-row">
             <div class="form-grp">
               <label>Tipo de reporte</label>
-              <select formControlName="tipo">
+              <select formControlName="an_report_type" [class.invalid]="hasRequiredError('an_report_type')">
                 <option value="P">Mascota perdida</option>
                 <option value="E">Mascota encontrada</option>
               </select>
+              @if (hasRequiredError('an_report_type')) { <span class="err-msg">{{ getRequiredMessage('an_report_type') }}</span> }
             </div>
             <div class="form-grp">
               <label>Especie</label>
-              <select formControlName="an_tp_animal">
+              <select formControlName="an_tp_animal" [class.invalid]="hasRequiredError('an_tp_animal')">
                 <option value="P">Perro</option>
                 <option value="G">Gato</option>
               </select>
+              @if (hasRequiredError('an_tp_animal')) { <span class="err-msg">{{ getRequiredMessage('an_tp_animal') }}</span> }
             </div>
           </div>
           <div class="form-row">
             <div class="form-grp">
               <label>Tamaño</label>
-              <select formControlName="an_tp_size">
+              <select formControlName="an_tp_size" [class.invalid]="hasRequiredError('an_tp_size')">
                 <option value="P">Pequeño</option>
                 <option value="M">Mediano</option>
                 <option value="G">Grande</option>
               </select>
+              @if (hasRequiredError('an_tp_size')) { <span class="err-msg">{{ getRequiredMessage('an_tp_size') }}</span> }
             </div>
             <div class="form-grp">
               <label>Sexo</label>
-              <select formControlName="an_tp_sex">
+              <select formControlName="an_tp_sex" [class.invalid]="hasRequiredError('an_tp_sex')">
                 <option value="M">Macho</option>
                 <option value="H">Hembra</option>
               </select>
+              @if (hasRequiredError('an_tp_sex')) { <span class="err-msg">{{ getRequiredMessage('an_tp_sex') }}</span> }
             </div>
           </div>
           <div class="form-grp">
             <label>Color</label>
-            <input type="text" formControlName="an_de_color" placeholder="Ej: marrón, blanco y negro…">
+            <input type="text" formControlName="an_de_color" placeholder="Ej: marrón, blanco y negro…" [class.invalid]="hasRequiredError('an_de_color')">
+            @if (hasRequiredError('an_de_color')) { <span class="err-msg">{{ getRequiredMessage('an_de_color') }}</span> }
           </div>
           <div class="form-grp">
             <label>Nombre (si lo conoce)</label>
@@ -156,15 +161,18 @@
           </div>
           <div class="form-grp">
             <label>Descripción</label>
-            <textarea formControlName="an_de_animal" placeholder="Señas particulares, collar, estado de salud…"></textarea>
+            <textarea formControlName="an_de_animal" placeholder="Señas particulares, collar, estado de salud…" [class.invalid]="hasRequiredError('an_de_animal')"></textarea>
+            @if (hasRequiredError('an_de_animal')) { <span class="err-msg">{{ getRequiredMessage('an_de_animal') }}</span> }
           </div>
           <div class="form-grp">
             <label>Ubicación</label>
-            <input type="text" formControlName="ubicacion" placeholder="Sector, municipio, estado…">
+            <input type="text" formControlName="an_ubicacion" placeholder="Sector, municipio, estado…" [class.invalid]="hasRequiredError('an_ubicacion')">
+            @if (hasRequiredError('an_ubicacion')) { <span class="err-msg">{{ getRequiredMessage('an_ubicacion') }}</span> }
           </div>
           <div class="form-grp">
-            <label>Teléfono de contacto</label>
-            <input type="tel" formControlName="telefono" placeholder="04XX-XXXXXXX">
+            <label>Teléfono de contacto </label>
+            <input type="tel" formControlName="an_telefono" placeholder="04XX-XXXXXXX" [class.invalid]="hasRequiredError('an_telefono')">
+            @if (hasRequiredError('an_telefono')) { <span class="err-msg">{{ getRequiredMessage('an_telefono') }}</span> }
           </div>
           @if (submitError()) {
             <p style="color:#DC4A4A;font-size:14px;margin:0 0 10px">{{ submitError() }}</p>

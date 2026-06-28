@@ -9,20 +9,12 @@
       <button class="chip" [class.active]="filter()==='all'" [class.teal]="filter()==='all'" (click)="setFilter('all')">Todos</button>
       <button class="chip" [class.active]="filter()==='dog'" [class.teal]="filter()==='dog'" (click)="setFilter('dog')">🐕 Perros</button>
       <button class="chip" [class.active]="filter()==='cat'" [class.teal]="filter()==='cat'" (click)="setFilter('cat')">🐈 Gatos</button>
-      <button class="chip" [class.active]="filter()==='other'" [class.teal]="filter()==='other'" (click)="setFilter('other')">Otros</button>
     </div>
     <div class="divider"></div>
     <div class="search">
       <i>🔍</i>
       <input type="text" placeholder="Buscar por nombre, zona…" (input)="onSearch($event)">
     </div>
-    <select class="fsel">
-      <option>Todos los estados</option>
-      <option>Distrito Capital</option>
-      <option>Miranda</option>
-      <option>La Guaira</option>
-      <option>Carabobo</option>
-    </select>
     <span class="count">{{ filtered().length }} reportes</span>
   </div>
 

@@ -28,7 +28,7 @@ class AnimalServiceTest {
 
     @BeforeEach
     void setUp() {
-        animalDto = new AnimalDto(1, 1, "Fido", "P", "Mestizo", "Negro", "M", "M", 3, "Amigable", "S", null, "P", new Date(), new Date());
+        animalDto = new AnimalDto(1, 1, "Fido", "P", "Mestizo", "Negro", "M", "M", 3, "Amigable", "S", null, "P", new Date(), new Date(),"P","C","C");
     }
 
     @Test

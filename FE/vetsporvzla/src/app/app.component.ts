@@ -20,22 +20,22 @@ export class AppComponent {
   submitError   = signal('');
 
   reportForm = this.fb.group({
-    tipo:         ['P', Validators.required],
+    an_report_type:         ['P', Validators.required],
     an_tp_animal: ['P', Validators.required],
     an_nm_animal: [''],
     an_de_color:  ['', Validators.required],
     an_tp_size:   ['M', Validators.required],
     an_tp_sex:    ['M', Validators.required],
     an_de_animal: ['', Validators.required],
-    ubicacion:    [''],
-    telefono:     [''],
+    an_ubicacion:    ['', Validators.required],
+    an_telefono:     ['', Validators.required],
   });
 
   openModal() {
     this.showModal = true;
     this.submitSuccess.set(false);
     this.submitError.set('');
-    this.reportForm.reset({ tipo: 'P', an_tp_animal: 'P', an_tp_size: 'M', an_tp_sex: 'M' });
+    this.reportForm.reset({ an_report_type: 'P', an_tp_animal: 'P', an_tp_size: 'M', an_tp_sex: 'M' });
   }
 
   closeModal() {
@@ -52,6 +52,7 @@ export class AppComponent {
 
     const v = this.reportForm.getRawValue();
     const payload: CreateAnimalRequest = {
+      an_report_type:           v.an_report_type as 'P' | 'E',
       an_tp_animal:             v.an_tp_animal as 'G' | 'P',
       an_nm_animal:             v.an_nm_animal || undefined,
       an_de_color:              v.an_de_color!,
@@ -59,6 +60,8 @@ export class AppComponent {
       an_tp_sex:                v.an_tp_sex as 'M' | 'H',
       an_de_animal:             v.an_de_animal!,
       an_in_require_vet_review: 'S',
+      an_ubicacion:             v.an_ubicacion!,
+      an_telefono:             v.an_telefono!,
     };
 
     this.animalSvc.createAnimal(payload).subscribe({
@@ -71,5 +74,25 @@ export class AppComponent {
         this.submitError.set(err.message);
       },
     });
+  }
+
+  hasRequiredError(controlName: string): boolean {
+    const control = this.reportForm.get(controlName);
+    return !!control?.hasError('required') && (control.touched || control.dirty);
+  }
+
+  getRequiredMessage(controlName: string): string {
+    const messages: Record<string, string> = {
+      an_report_type: 'Debe seleccionar el tipo de reporte.',
+      an_tp_animal: 'Debe seleccionar la especie.',
+      an_de_color: 'El color es obligatorio.',
+      an_tp_size: 'Debe seleccionar el tamaño.',
+      an_tp_sex: 'Debe seleccionar el sexo.',
+      an_de_animal: 'La descripción es obligatoria.',
+      an_ubicacion: 'La ubicación es obligatoria.',
+      an_telefono: 'El teléfono de contacto es obligatorio.',
+    };
+
+    return messages[controlName] ?? 'Este campo es obligatorio.';
   }
 }

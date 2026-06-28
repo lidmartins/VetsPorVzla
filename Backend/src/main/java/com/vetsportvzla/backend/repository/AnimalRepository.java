@@ -26,6 +26,7 @@ public class AnimalRepository {
 
         Map<String, Object> inParams = new HashMap<>();
         inParams.put("p_an_re_cd_refugio", animal.getAnReCdRefugio());
+        inParams.put("p_an_report_type", animal.getAnReportType());
         inParams.put("p_an_nm_animal", animal.getAnNmAnimal());
         inParams.put("p_an_tp_animal", animal.getAnTpAnimal());
         inParams.put("p_an_de_breed", animal.getAnDeBreed());
@@ -37,6 +38,8 @@ public class AnimalRepository {
         inParams.put("p_an_in_require_vet_review", animal.getAnInRequireVetReview());
         inParams.put("p_an_de_observacion_vet", animal.getAnDeObservacionVet());
         inParams.put("p_an_st_vet_review", animal.getAnStVetReview());
+        inParams.put("p_an_ubicacion", animal.getAnUbicacion());
+        inParams.put("p_an_telefono", animal.getAnTelefono());
 
         Map<String, Object> out = jdbcCall.execute(inParams);
         List<AnimalDto> animals = (List<AnimalDto>) out.get("animal");
@@ -51,6 +54,7 @@ public class AnimalRepository {
         Map<String, Object> inParams = new HashMap<>();
         inParams.put("p_an_cd_animal", animal.getAnCdAnimal());
         inParams.put("p_an_re_cd_refugio", animal.getAnReCdRefugio());
+        inParams.put("p_an_report_type", animal.getAnReportType());
         inParams.put("p_an_nm_animal", animal.getAnNmAnimal());
         inParams.put("p_an_tp_animal", animal.getAnTpAnimal());
         inParams.put("p_an_de_breed", animal.getAnDeBreed());
@@ -62,6 +66,8 @@ public class AnimalRepository {
         inParams.put("p_an_in_require_vet_review", animal.getAnInRequireVetReview());
         inParams.put("p_an_de_observacion_vet", animal.getAnDeObservacionVet());
         inParams.put("p_an_st_vet_review", animal.getAnStVetReview());
+        inParams.put("p_an_ubicacion", animal.getAnUbicacion());
+        inParams.put("p_an_telefono", animal.getAnTelefono());
 
         Map<String, Object> out = jdbcCall.execute(inParams);
         List<AnimalDto> animals = (List<AnimalDto>) out.get("animal");

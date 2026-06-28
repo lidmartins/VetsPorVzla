@@ -55,4 +55,14 @@ public class AnimalDto {
 
     @JsonProperty("an_dt_updated")
     private Date anDtUpdated;
+
+    @JsonProperty("an_report_type")
+    private String anReportType;
+
+    @JsonProperty("an_ubicacion")
+    private String anUbicacion;
+
+    @JsonProperty("an_telefono")
+    private String anTelefono;
+
 }

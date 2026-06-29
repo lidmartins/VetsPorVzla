@@ -1,6 +1,5 @@
 <div class="embar">
-  <strong>🚨 EMERGENCIA ACTIVA</strong>
-  <span>Fuertes lluvias en Miranda y Vargas — refugios activados · </span>
+  🚨 Activación de emergencia: <strong>Terremoto · Temporales</strong> ·
   <span class="lnk" routerLink="/refugios">Ver refugios →</span>
 </div>
 
@@ -14,29 +13,41 @@
           <span class="paw">🐾</span>
         </div>
         <div>
-          <div class="brand-name">Veterinarios<br><span>por Venezuela</span></div>
+          <div class="brand-name">Veterinarios <span>por Venezuela</span></div>
           <div class="brand-sub">
             <div class="flag"><b></b><b></b><b></b></div>
-            <span class="brand-tag">Red de emergencia animal</span>
+            <span class="brand-tag">Red de emergencia</span>
           </div>
         </div>
       </a>
 
       <nav>
-        <a class="nav-link" routerLink="/perdidas"    routerLinkActive="active">🔴 Perdidas</a>
-        <a class="nav-link" routerLink="/encontradas" routerLinkActive="active">🟢 Encontradas</a>
-        <a class="nav-link" routerLink="/refugios"    routerLinkActive="active">🏠 Refugios</a>
-        <a class="nav-link" routerLink="/adopciones"  routerLinkActive="active">💜 Adopciones</a>
-        <a class="nav-link" routerLink="/quienes-somos" routerLinkActive="active">Quiénes somos</a>
+        <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Inicio</a>
+        <a class="nav-link" routerLink="/perdidas"     routerLinkActive="active">Mascotas Perdidas</a>
+        <a class="nav-link" routerLink="/encontradas"  routerLinkActive="active">Mascotas Encontradas</a>
+        <a class="nav-link" routerLink="/refugios"     routerLinkActive="active">Refugios</a>
+        <a class="nav-link" routerLink="/adopciones"   routerLinkActive="active">Adopciones</a>
+        <a class="nav-link" routerLink="/quienes-somos" routerLinkActive="active">Quiénes Somos</a>
       </nav>
 
       <div class="hbtns">
-        <a class="btn-vet" routerLink="/login">🩺 Área veterinaria</a>
+        <a class="btn-vet" routerLink="/login">🩺 Panel Vet</a>
         <button class="btn-report" (click)="openModal()">+ Reportar</button>
       </div>
     </div>
   </div>
 </header>
+
+<div class="alert-banner">
+  <div class="alert-in">
+    <span class="alert-dot"></span>
+    <div class="alert-text">
+      <div class="alert-title">🚨 ALERTA ACTIVA — S.O.S. Terremoto Venezuela</div>
+      <div class="alert-sub">Plataforma activa para reunir mascotas extraviadas. Publica sin registro ni contraseña. ¡Ayúdanos a difundir!</div>
+    </div>
+    <button class="alert-btn" (click)="openModal()">📣 Reportar mi mascota ahora →</button>
+  </div>
+</div>
 
 <main>
   <router-outlet />
@@ -49,139 +60,232 @@
         <div class="lg"><div class="v"></div><div class="h"></div></div>
         <b>Veterinarios<br>por Venezuela</b>
       </div>
-      <div class="flag" style="height:4px;width:60px;margin-top:14px"><b></b><b></b><b></b></div>
-      <p class="desc">Red coordinada por médicos veterinarios para la protección animal en Venezuela durante emergencias.</p>
+      <div class="flag"><b></b><b></b><b></b></div>
+      <p class="desc">Red de emergencia coordinada por médicos veterinarios colegiados de Venezuela.</p>
     </div>
     <div>
       <h4>Plataforma</h4>
       <div class="flinks">
-        <a routerLink="/perdidas">Mascotas perdidas</a>
-        <a routerLink="/encontradas">Mascotas encontradas</a>
-        <a routerLink="/refugios">Refugios activos</a>
+        <a routerLink="/perdidas">Mascotas Perdidas</a>
+        <a routerLink="/encontradas">Mascotas Encontradas</a>
+        <a routerLink="/refugios">Refugios Temporales</a>
         <a routerLink="/adopciones">Adopciones</a>
       </div>
     </div>
     <div>
-      <h4>Organización</h4>
-      <div class="flinks">
-        <a routerLink="/quienes-somos">Quiénes somos</a>
-        <a routerLink="/login">Área veterinaria</a>
+      <h4>Contacto</h4>
+      <div class="fcontact">
+        <span>✉️ <a href="mailto:info&#64;veterinariosporvenezuela.com">info&#64;veterinariosporvenezuela.com</a></span>
+        <div class="socials">
+          <a href="https://instagram.com/veterinariosporvenezuela" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.3"/><circle cx="17.2" cy="6.8" r="1.3" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a href="https://x.com/vetsporvzla" target="_blank" rel="noopener" aria-label="X">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.66l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <a href="mailto:info@veterinariosporvenezuela.com" aria-label="Correo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m4 7 8 6 8-6"/></svg>
+          </a>
+        </div>
       </div>
     </div>
     <div>
-      <h4>Contacto de emergencia</h4>
-      <div class="fcontact">
-        <span>📞 0800-VET-VZL</span>
-        <span>✉️ emergencias&#64;vetsporvzla.org</span>
-        <div class="socials">
-          <a href="#" aria-label="Instagram">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-          </a>
-          <a href="#" aria-label="Twitter/X">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-          </a>
-        </div>
-        <button class="wa-emerg">
-          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          WhatsApp Emergencia
-        </button>
-      </div>
+      <h4>Emergencia 24/7</h4>
+      <p class="desc" style="margin-top:0;margin-bottom:12px">¿Un animal en peligro ahora mismo?</p>
+      <button class="wa-emerg" (click)="openModal()">📣 Reportar Mascota</button>
     </div>
   </div>
   <div class="foot-bot">
     <div class="in">
-      <span>© 2024 Veterinarios por Venezuela · Todos los derechos reservados</span>
-      <span>Desarrollado con ❤️ para los animales de Venezuela</span>
+      <span>© 2026 Veterinarios por Venezuela · Hecho con 🐾 en Venezuela</span>
+      <span>Términos · Privacidad</span>
     </div>
   </div>
 </footer>
 
-<button class="fab" (click)="openModal()">🐾 Reportar mascota</button>
+<button class="fab show" (click)="openModal()">🐾 Reportar mascota</button>
 
 @if (showModal) {
-  <div class="overlay" (click)="closeModal()">
+  <div class="overlay show" (click)="closeModal()">
     <div class="modal" (click)="$event.stopPropagation()">
+
       <div class="modal-head">
-        <h2>Reportar mascota</h2>
-        <button class="close" type="button" (click)="closeModal()">✕</button>
+        <div class="top">
+          <div class="ti"><div class="ic">📣</div><h3>Reportar una mascota</h3></div>
+          <button class="x" type="button" (click)="closeModal()">✕</button>
+        </div>
+        @if (!submitSuccess()) {
+          <div class="progress-wrap">
+            <div class="steplabels">
+              <b [class.done]="currentStep() >= 1">Tipo</b>
+              <b [class.done]="currentStep() >= 2">Animal</b>
+              <b [class.done]="currentStep() >= 3">Ubicación</b>
+              <b [class.done]="currentStep() >= 4">Contacto</b>
+              <b [class.done]="currentStep() >= 5">Fotos</b>
+            </div>
+            <div class="ptrack"><div class="pfill" [style.width]="(currentStep() / 5 * 100) + '%'"></div></div>
+          </div>
+        }
       </div>
 
-      @if (submitSuccess()) {
-        <div style="text-align:center;padding:24px 0 8px">
-          <p style="font-size:15px;color:#2F9E63;margin:0 0 20px">✅ Reporte enviado. Un veterinario revisará tu caso pronto.</p>
-          <button class="submit-btn" type="button" (click)="closeModal()">Cerrar</button>
-        </div>
-      } @else {
-        <form [formGroup]="reportForm" (ngSubmit)="submit()">
-          <div class="form-row">
-            <div class="form-grp">
-              <label>Tipo de reporte</label>
-              <select formControlName="an_report_type" [class.invalid]="hasRequiredError('an_report_type')">
-                <option value="P">Mascota perdida</option>
-                <option value="E">Mascota encontrada</option>
-              </select>
-              @if (hasRequiredError('an_report_type')) { <span class="err-msg">{{ getRequiredMessage('an_report_type') }}</span> }
-            </div>
-            <div class="form-grp">
-              <label>Especie</label>
-              <select formControlName="an_tp_animal" [class.invalid]="hasRequiredError('an_tp_animal')">
-                <option value="P">Perro</option>
-                <option value="G">Gato</option>
-              </select>
-              @if (hasRequiredError('an_tp_animal')) { <span class="err-msg">{{ getRequiredMessage('an_tp_animal') }}</span> }
+      <div class="modal-body">
+        @if (submitSuccess()) {
+          <div class="mstep active">
+            <div class="success">
+              <div class="circle">✅</div>
+              <h3>¡Reporte enviado!</h3>
+              <p>Un médico veterinario de nuestra red revisará tu caso y lo publicará en breve. Te notificaremos por WhatsApp ante cualquier novedad.</p>
+              <div class="info">
+                <span style="font-size:22px">🩺</span>
+                <div>
+                  <div style="font-weight:700;font-size:13.5px;color:#33403c">En revisión veterinaria</div>
+                  <div style="font-size:12.5px;color:#8a938d">Tiempo estimado: 1–3 horas</div>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="form-row">
-            <div class="form-grp">
-              <label>Tamaño</label>
-              <select formControlName="an_tp_size" [class.invalid]="hasRequiredError('an_tp_size')">
-                <option value="P">Pequeño</option>
-                <option value="M">Mediano</option>
-                <option value="G">Grande</option>
-              </select>
-              @if (hasRequiredError('an_tp_size')) { <span class="err-msg">{{ getRequiredMessage('an_tp_size') }}</span> }
-            </div>
-            <div class="form-grp">
-              <label>Sexo</label>
-              <select formControlName="an_tp_sex" [class.invalid]="hasRequiredError('an_tp_sex')">
-                <option value="M">Macho</option>
-                <option value="H">Hembra</option>
-              </select>
-              @if (hasRequiredError('an_tp_sex')) { <span class="err-msg">{{ getRequiredMessage('an_tp_sex') }}</span> }
-            </div>
-          </div>
-          <div class="form-grp">
-            <label>Color</label>
-            <input type="text" formControlName="an_de_color" placeholder="Ej: marrón, blanco y negro…" [class.invalid]="hasRequiredError('an_de_color')">
-            @if (hasRequiredError('an_de_color')) { <span class="err-msg">{{ getRequiredMessage('an_de_color') }}</span> }
-          </div>
-          <div class="form-grp">
-            <label>Nombre (si lo conoce)</label>
-            <input type="text" formControlName="an_nm_animal" placeholder="Ej: Luna, Max…">
-          </div>
-          <div class="form-grp">
-            <label>Descripción</label>
-            <textarea formControlName="an_de_animal" placeholder="Señas particulares, collar, estado de salud…" [class.invalid]="hasRequiredError('an_de_animal')"></textarea>
-            @if (hasRequiredError('an_de_animal')) { <span class="err-msg">{{ getRequiredMessage('an_de_animal') }}</span> }
-          </div>
-          <div class="form-grp">
-            <label>Ubicación</label>
-            <input type="text" formControlName="an_ubicacion" placeholder="Sector, municipio, estado…" [class.invalid]="hasRequiredError('an_ubicacion')">
-            @if (hasRequiredError('an_ubicacion')) { <span class="err-msg">{{ getRequiredMessage('an_ubicacion') }}</span> }
-          </div>
-          <div class="form-grp">
-            <label>Teléfono de contacto </label>
-            <input type="tel" formControlName="an_telefono" placeholder="04XX-XXXXXXX" [class.invalid]="hasRequiredError('an_telefono')">
-            @if (hasRequiredError('an_telefono')) { <span class="err-msg">{{ getRequiredMessage('an_telefono') }}</span> }
-          </div>
-          @if (submitError()) {
-            <p style="color:#DC4A4A;font-size:14px;margin:0 0 10px">{{ submitError() }}</p>
-          }
-          <button class="submit-btn" type="submit" [disabled]="submitting()">
-            {{ submitting() ? 'Enviando…' : 'Enviar reporte' }}
+        } @else {
+          <form [formGroup]="reportForm">
+            @if (currentStep() === 1) {
+              <div class="mstep active">
+                <h4>¿Qué quieres reportar?</h4>
+                <div class="sub">Selecciona el tipo de reporte.</div>
+                <div class="typecards">
+                  <div class="typecard" [class.sel-lost]="selectedType() === 'P'" (click)="selectType('P')">
+                    <div class="em">🔴</div><b>Mascota Perdida</b><small>Perdí a mi animal</small>
+                  </div>
+                  <div class="typecard" [class.sel-found]="selectedType() === 'E'" (click)="selectType('E')">
+                    <div class="em">🟢</div><b>Mascota Encontrada</b><small>Rescaté un animal</small>
+                  </div>
+                </div>
+              </div>
+            }
+            @if (currentStep() === 2) {
+              <div class="mstep active">
+                <h4>Información del animal</h4>
+                <div class="fcol">
+                  <div class="frow">
+                    <div>
+                      <label>Nombre (si lo sabes)</label>
+                      <input class="inp" formControlName="an_nm_animal" placeholder="Ej: Luna">
+                    </div>
+                    <div>
+                      <label>Especie</label>
+                      <select class="inp" formControlName="an_tp_animal">
+                        <option value="P">Perro</option>
+                        <option value="G">Gato</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="frow">
+                    <div>
+                      <label>Color</label>
+                      <input class="inp" formControlName="an_de_color" placeholder="Marrón y blanco">
+                      @if (hasRequiredError('an_de_color')) { <span class="err-msg">{{ getRequiredMessage('an_de_color') }}</span> }
+                    </div>
+                  </div>
+                  <div class="frow">
+                    <div>
+                      <label>Tamaño</label>
+                      <select class="inp" formControlName="an_tp_size">
+                        <option value="P">Pequeño</option>
+                        <option value="M">Mediano</option>
+                        <option value="G">Grande</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label>Sexo</label>
+                      <select class="inp" formControlName="an_tp_sex">
+                        <option value="M">Macho</option>
+                        <option value="H">Hembra</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div>
+                    <label>Descripción / señas particulares</label>
+                    <textarea class="inp" formControlName="an_de_animal" placeholder="Collar rojo, mancha en la oreja…"></textarea>
+                    @if (hasRequiredError('an_de_animal')) { <span class="err-msg">{{ getRequiredMessage('an_de_animal') }}</span> }
+                  </div>
+                  <div style="background:#fdecec;border:1.5px solid #f5c2bc;border-radius:12px;padding:13px 15px">
+                    <label class="check" style="align-items:flex-start;gap:10px">
+                      <input type="checkbox" style="margin-top:2px;width:17px;height:17px;accent-color:#DC4A4A;flex-shrink:0">
+                      <div>
+                        <div style="font-weight:700;font-size:14px;color:#DC4A4A">🚨 El animal necesita atención médica urgente</div>
+                        <div style="font-size:12.5px;color:#8a3a2c;margin-top:2px">Está herido, enfermo o en peligro inmediato. Un veterinario priorizará este caso.</div>
+                      </div>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            }
+            @if (currentStep() === 3) {
+              <div class="mstep active">
+                <h4>Ubicación y fecha</h4>
+                <div class="fcol">
+                  <div>
+                    <label>Ubicación</label>
+                    <input class="inp" formControlName="an_ubicacion" placeholder="Sector, municipio, estado…">
+                    @if (hasRequiredError('an_ubicacion')) { <span class="err-msg">{{ getRequiredMessage('an_ubicacion') }}</span> }
+                  </div>
+                  <div class="note">
+                    <span style="font-size:18px">📍</span>
+                    <span>Podrás ajustar la ubicación exacta en el mapa después de enviar.</span>
+                  </div>
+                </div>
+              </div>
+            }
+            @if (currentStep() === 4) {
+              <div class="mstep active">
+                <h4>Tus datos de contacto</h4>
+                <div class="sub">Para que la familia o nuestro equipo pueda comunicarse contigo.</div>
+                <div class="fcol">
+                  <div>
+                    <label>Teléfono</label>
+                    <input class="inp" formControlName="an_telefono" placeholder="0414-1234567">
+                    @if (hasRequiredError('an_telefono')) { <span class="err-msg">{{ getRequiredMessage('an_telefono') }}</span> }
+                  </div>
+                  <label class="check">
+                    <input type="checkbox" checked>Acepto que un veterinario revise y publique este reporte.
+                  </label>
+                </div>
+              </div>
+            }
+            @if (currentStep() === 5) {
+              <div class="mstep active">
+                <h4>Fotos del animal</h4>
+                <div class="sub">Una buena foto multiplica las probabilidades de un reencuentro.</div>
+                <div class="dropzone">
+                  <div class="em">📸</div>
+                  <b>Arrastra tus fotos aquí</b>
+                  <small>o haz clic para seleccionar · JPG, PNG hasta 10MB</small>
+                </div>
+                <div class="thumbs">
+                  <div class="thumb">🐾</div>
+                  <div class="thumb empty">+</div>
+                  <div class="thumb empty">+</div>
+                </div>
+                @if (submitError()) {
+                  <p style="color:#DC4A4A;font-size:14px;margin-top:16px">{{ submitError() }}</p>
+                }
+              </div>
+            }
+          </form>
+        }
+      </div>
+
+      <div class="modal-foot">
+        @if (submitSuccess()) {
+          <span></span>
+          <button class="m-next" type="button" (click)="closeModal()">Cerrar</button>
+        } @else {
+          <button class="m-back" type="button" (click)="prevStep()" [style.visibility]="currentStep() === 1 ? 'hidden' : 'visible'">← Atrás</button>
+          <div class="m-count">Paso {{ currentStep() }} de 5</div>
+          <button class="m-next" type="button" (click)="nextStep()" [disabled]="submitting()">
+            {{ currentStep() === 5 ? (submitting() ? 'Enviando…' : 'Enviar reporte') : 'Siguiente →' }}
           </button>
-        </form>
-      }
+        }
+      </div>
+
     </div>
   </div>
 }

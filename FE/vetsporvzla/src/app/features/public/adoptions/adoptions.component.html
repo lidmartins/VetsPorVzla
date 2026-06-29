@@ -1,1 +1,95 @@
-<p>adoptions works!</p>
+<div class="wrap page-pad">
+  <div style="display:flex;align-items:center;gap:11px;margin-bottom:6px">
+    <span style="font-size:15px">💜</span>
+    <span class="eyebrow" style="color:var(--adopt)">Adopciones</span>
+  </div>
+  <h1 class="page-h1">Un nuevo hogar, con respaldo veterinario</h1>
+  <p class="lead">Cada animal en adopción fue evaluado y aprobado por un médico veterinario de nuestra red. Adoptar es un compromiso: te acompañamos en el proceso.</p>
+
+  <div class="tabs">
+    <button class="tab" [class.active]="activeTab === 'list'" (click)="setTab('list')">Animales en Adopción</button>
+    <button class="tab" [class.active]="activeTab === 'apply'" (click)="setTab('apply')">Quiero Adoptar</button>
+  </div>
+
+  @if (activeTab === 'list') {
+    <div class="adopt-grid">
+      @for (a of adoptData; track a.name) {
+        <div class="acard">
+          <div class="photo" [style.background]="a.bg">
+            <span class="pw">{{ a.icon }}</span>
+            <span class="sbadge" [style.background]="a.badgeBg">{{ a.status }}</span>
+          </div>
+          <div class="body">
+            <div class="title">
+              <span class="pname">{{ a.name }}</span>
+              <span class="age">{{ a.age }}</span>
+            </div>
+            <div class="tags">
+              <span class="tag size">{{ a.size }}</span>
+              <span class="tag size">{{ a.health }}</span>
+            </div>
+            <div class="vetseal">
+              <span>✅ Aprobado por veterinario</span>
+            </div>
+            <button class="btn-adopt" (click)="setTab('apply')">💜 Quiero adoptarlo</button>
+          </div>
+        </div>
+      }
+    </div>
+  }
+
+  @if (activeTab === 'apply') {
+    <div class="apply-grid">
+      <div class="form-card">
+        <h3>Formulario de adopción</h3>
+        <p>Cuéntanos sobre ti y tu hogar. Un veterinario revisará tu solicitud en 24–48 horas.</p>
+        <div class="fcol">
+          <div><label>Nombre completo</label><input class="inp" placeholder="Tu nombre"></div>
+          <div class="frow">
+            <div><label>Teléfono</label><input class="inp" placeholder="0414…"></div>
+            <div><label>Ciudad</label><input class="inp" placeholder="Ciudad"></div>
+          </div>
+          <div>
+            <label>Tipo de vivienda</label>
+            <select class="inp">
+              <option>Casa con patio</option>
+              <option>Apartamento</option>
+              <option>Casa sin patio</option>
+            </select>
+          </div>
+          <div>
+            <label>¿Por qué quieres adoptar?</label>
+            <textarea class="inp" placeholder="Cuéntanos…"></textarea>
+          </div>
+          <button class="lf-submit">Enviar solicitud</button>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div class="aside-card">
+          <h4>🩺 Proceso responsable</h4>
+          <div class="proc">
+            <div class="row">
+              <div class="n">1</div>
+              <div><b>Solicitud</b><div><small>Completas el formulario con tus datos y los de tu hogar.</small></div></div>
+            </div>
+            <div class="row">
+              <div class="n">2</div>
+              <div><b>Revisión veterinaria</b><div><small>Un MV evalúa la compatibilidad y agenda una entrevista.</small></div></div>
+            </div>
+            <div class="row">
+              <div class="n">3</div>
+              <div><b>Entrega responsable</b><div><small>Firmas el compromiso de adopción y recibes seguimiento.</small></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="guarantee">
+          <span style="font-size:22px">✅</span>
+          <div>
+            <b>Aprobación veterinaria garantizada</b>
+            <small>Ningún animal sale de nuestra red sin una evaluación de salud completa.</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+</div>

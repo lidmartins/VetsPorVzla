@@ -18,6 +18,8 @@ export class AppComponent {
   submitting    = signal(false);
   submitSuccess = signal(false);
   submitError   = signal('');
+  currentStep   = signal(1);
+  selectedType  = signal<'P' | 'E' | ''>('');
 
   reportForm = this.fb.group({
     an_report_type:         ['P', Validators.required],
@@ -33,6 +35,8 @@ export class AppComponent {
 
   openModal() {
     this.showModal = true;
+    this.currentStep.set(1);
+    this.selectedType.set('');
     this.submitSuccess.set(false);
     this.submitError.set('');
     this.reportForm.reset({ an_report_type: 'P', an_tp_animal: 'P', an_tp_size: 'M', an_tp_sex: 'M' });
@@ -40,6 +44,25 @@ export class AppComponent {
 
   closeModal() {
     this.showModal = false;
+  }
+
+  selectType(type: 'P' | 'E') {
+    this.selectedType.set(type);
+    this.reportForm.patchValue({ an_report_type: type });
+  }
+
+  nextStep() {
+    if (this.currentStep() < 5) {
+      this.currentStep.set(this.currentStep() + 1);
+    } else {
+      this.submit();
+    }
+  }
+
+  prevStep() {
+    if (this.currentStep() > 1) {
+      this.currentStep.set(this.currentStep() - 1);
+    }
   }
 
   submit() {

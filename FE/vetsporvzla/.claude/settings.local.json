@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx ng *)",
+      "Bash(python3 -c \"import sys,json; a=json.load\\(sys.stdin\\); b=a['projects']['vetsporvzla']['architect']['build']['options']; print\\('styles:', b.get\\('styles'\\)\\); print\\('index:', b.get\\('index'\\)\\); print\\('main:', b.get\\('main'\\)\\)\")"
+    ]
+  }
+}

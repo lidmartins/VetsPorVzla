@@ -1,1 +1,35 @@
-<p>about works!</p>
+<div class="about-hero">
+  <div class="eyebrow">Quiénes somos</div>
+  <h1>Veterinarios al servicio de Venezuela</h1>
+  <p>Somos una red de médicos veterinarios colegiados, rescatistas y voluntarios que se activa ante desastres naturales para proteger a los animales y acompañar a las familias afectadas. No vendemos nada: coordinamos ayuda.</p>
+</div>
+
+<div class="values">
+  @for (v of values; track v.title) {
+    <div class="value">
+      <div class="ic" [style.background]="v.tint">{{ v.icon }}</div>
+      <h3>{{ v.title }}</h3>
+      <p>{{ v.desc }}</p>
+    </div>
+  }
+</div>
+
+<div class="statband">
+  <div class="in">
+    <span class="paww">🐾</span>
+    <div class="row">
+      <div><div class="n">480+</div><div class="l">Animales atendidos</div></div>
+      <div><div class="n">210</div><div class="l">Reencuentros logrados</div></div>
+      <div><div class="n">64</div><div class="l">Veterinarios colegiados</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="join">
+  <h2>¿Quieres sumarte a la red?</h2>
+  <p>Si eres veterinario, rescatista o quieres ser voluntario, te necesitamos.</p>
+  <div class="btns">
+    <button class="btn-teal">+ Registrar Refugio</button>
+    <a class="b2" routerLink="/login">Soy veterinario</a>
+  </div>
+</div>

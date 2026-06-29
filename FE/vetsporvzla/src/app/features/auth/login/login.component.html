@@ -1,1 +1,64 @@
-<p>login works!</p>
+<div class="login-wrap">
+  <div class="login-card">
+
+    <div class="login-brand">
+      <div class="login-logo"><div class="v"></div><div class="h"></div></div>
+      <div>
+        <div class="login-brand-name">Veterinarios<br>por Venezuela</div>
+        <div class="login-brand-sub">Portal profesional</div>
+      </div>
+    </div>
+
+    <div class="login-hd">
+      <h2>Acceso veterinario</h2>
+      <p>Ingresa con tus credenciales para acceder al panel de gestión.</p>
+    </div>
+
+    @if (errorMsg()) {
+      <div class="login-error"><span>⚠️</span> {{ errorMsg() }}</div>
+    }
+
+    <form class="login-form" [formGroup]="form" (ngSubmit)="submit()">
+      <div class="lf-group">
+        <label for="loginEmail">Correo electrónico</label>
+        <input id="loginEmail" type="email" class="lf-inp" formControlName="email"
+               placeholder="tu@correo.com" autocomplete="username">
+      </div>
+      <div class="lf-group">
+        <label for="loginPass">Contraseña</label>
+        <div class="lf-pw-wrap">
+          <input id="loginPass" [type]="showPw ? 'text' : 'password'" class="lf-inp"
+                 formControlName="password" placeholder="••••••••" autocomplete="current-password">
+          <button class="lf-eye" type="button" (click)="showPw = !showPw"
+                  [title]="showPw ? 'Ocultar contraseña' : 'Mostrar contraseña'">
+            {{ showPw ? '🙈' : '👁' }}
+          </button>
+        </div>
+      </div>
+      <div class="lf-hint">
+        <span style="color:var(--muted);font-size:13px">Demo: <b>vet&#64;vpv.com</b> / <b>demo1234</b></span>
+      </div>
+      <button class="lf-submit" type="submit" [disabled]="submitting()">
+        {{ submitting() ? 'Ingresando…' : 'Ingresar al panel →' }}
+      </button>
+    </form>
+
+    <div class="login-foot">
+      <a class="login-back" routerLink="/">← Volver al inicio</a>
+    </div>
+
+  </div>
+
+  <div class="login-deco">
+    <div class="login-deco-inner">
+      <div class="login-deco-paw">🐾</div>
+      <h3>Red de emergencia<br>animal coordinada</h3>
+      <p>Plataforma veterinaria para la gestión de mascotas perdidas, refugios y adopciones durante desastres naturales en Venezuela.</p>
+      <div class="login-deco-stats">
+        <div><b>142</b><span>Animales registrados</span></div>
+        <div><b>9</b><span>Refugios activos</span></div>
+        <div><b>64</b><span>Veterinarios en red</span></div>
+      </div>
+    </div>
+  </div>
+</div>

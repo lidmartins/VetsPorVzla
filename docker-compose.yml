@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: vpv-mysql
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    environment:
+      MYSQL_ROOT_PASSWORD: vpv_root
+      MYSQL_DATABASE: veterinarios_venezuela
+      MYSQL_USER: vpv_user
+      MYSQL_PASSWORD: vpv_pass
+    ports:
+      - "3306:3306"
+    volumes:
+      - vpv_mysql_data:/var/lib/mysql
+      - ./docker-init:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build: ./Backend
+    container_name: vpv-backend
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/veterinarios_venezuela
+      SPRING_DATASOURCE_USERNAME: vpv_user
+      SPRING_DATASOURCE_PASSWORD: vpv_pass
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+volumes:
+  vpv_mysql_data:

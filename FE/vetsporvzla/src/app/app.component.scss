@@ -1,5 +1,17 @@
 .err-msg {
   color: #dc4a4a;
   font-size: 13px;
-  margin: 6px 0 0;
+  margin: 4px 0 0;
+  display: block;
+}
+
+// Modal form overrides — .inp on select elements need font-family
+.modal select.inp, .modal input.inp, .modal textarea.inp {
+  font-family: inherit;
+}
+
+.modal-head h3 {
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--head);
 }
